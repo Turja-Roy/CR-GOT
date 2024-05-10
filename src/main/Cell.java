@@ -1,3 +1,5 @@
+package main;
+
 public class Cell {
     private int player;
     private int sigilCount;

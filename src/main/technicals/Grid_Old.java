@@ -8,7 +8,6 @@ public class Grid {
     private int cellNum;
     private int numPlayers;
     private int[] playerSigilCount;
-    private double[] sound;
     private Interfaces intface = new Interfaces();
 
     // Constructor

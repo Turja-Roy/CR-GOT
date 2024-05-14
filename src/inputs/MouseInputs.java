@@ -2,7 +2,15 @@ package inputs;
 
 import java.awt.event.MouseListener;
 
+import main.visuals.GamePanel;
+
 public class MouseInputs implements MouseListener {
+    private GamePanel gamePanel;
+
+    public MouseInputs (GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+    }
+
     @Override
     public void mouseClicked(java.awt.event.MouseEvent e) {
         System.out.println("Mouse Clicked");

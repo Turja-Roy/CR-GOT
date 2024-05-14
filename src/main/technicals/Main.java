@@ -1,4 +1,4 @@
-package main;
+package main.technicals;
 
 import java.util.*;
 import java.io.File;

@@ -1,9 +1,16 @@
 package main.technicals;
 
 import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.io.PrintStream;
 
 public class Main {
     public static int round;
+    public static String fname;
+    public static File file;
+    public static PrintStream out;
 
     public static void main(String[] args) {
         // Initialize the round

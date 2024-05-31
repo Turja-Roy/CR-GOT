@@ -1,5 +1,7 @@
 package main.visuals;
 
+import java.awt.Dimension;
+import java.awt.Graphics;
 import javax.swing.JPanel;
 
 import inputs.MouseInputs;
@@ -24,6 +26,5 @@ public class GamePanel extends JPanel {
     public void paintComponent (Graphics g) {
         super.paintComponent(g);
 
-        draw
     }
 }

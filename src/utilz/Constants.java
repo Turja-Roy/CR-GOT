@@ -1,10 +1,25 @@
 package utilz;
 
+import static utilz.Constants.GameConstants.SCALE;
+
 import java.awt.Color;
 
-import main.technicals.Player;
+import player.Player;
 
 public class Constants {
+    // Game constants
+    public static class GameConstants {
+        public static final float SCALE = 1.5f;
+
+        public static final int CELL_SIZE_DEFAULT = 45;
+        public static final int CELL_SIZE = (int) (CELL_SIZE_DEFAULT * SCALE);
+
+        public static final int CELLS_IN_WIDTH = 18;
+        public static final int CELLS_IN_HEIGHT = 10;
+
+        public static final int GAME_WIDTH = CELL_SIZE * CELLS_IN_WIDTH;
+        public static final int GAME_HEIGHT = CELL_SIZE * CELLS_IN_HEIGHT;
+    }
     
     // House constants
     public static class House {
@@ -35,7 +50,7 @@ public class Constants {
         public static final Color COLOR_BOLTON = new Color(83, 0, 14);
 
         public static Color getColor (Player player) {
-            switch (player.house) {
+            switch (player.getHouse()) {
                 case House.TARGARYEN:
                     return COLOR_TARGARYEN;
                 case House.STARK:
@@ -76,7 +91,7 @@ public class Constants {
         public static final String SIGIL_BOLTON = "/images/Bolton.png";
 
         public static String getSigil (Player player) {
-            switch (player.house) {
+            switch (player.getHouse()) {
                 case House.TARGARYEN:
                     return SIGIL_TARGARYEN;
                 case House.STARK:
@@ -100,6 +115,38 @@ public class Constants {
                 default:
                     return null;
             }
+        }
+    }
+
+    // UI constants
+    public static class UI {
+        public static final float BUTTON_COMPRESS_FACTOR = 0.20f;
+
+        public static class MenuButtons {
+            public static final int MB_PLAY = 0;
+            public static final int MB_RULES = 1;
+            public static final int MB_QUIT = 2;
+
+            public static final int MB_WIDTH_DEFAULT = 469;
+            public static final int MB_HEIGHT_DEFAULT = 304;
+            public static final int MB_WIDTH = (int) (MB_WIDTH_DEFAULT * BUTTON_COMPRESS_FACTOR * SCALE);
+            public static final int MB_HEIGHT = (int) (MB_HEIGHT_DEFAULT * BUTTON_COMPRESS_FACTOR * SCALE);
+        }
+
+        public static class NumPlayerButtons {
+            public static final int NPB_2P = 2;
+            public static final int NPB_3P = 3;
+            public static final int NPB_4P = 4;
+            public static final int NPB_5P = 5;
+            public static final int NPB_6P = 6;
+            public static final int NPB_7P = 7;
+            public static final int NPB_BACK = 100;
+            public static final int NPB_QUIT = 200;
+
+            public static final int NPB_WIDTH_DEFAULT = 500;
+            public static final int NPB_HEIGHT_DEFAULT = 304;
+            public static final int NPB_WIDTH = (int) (NPB_WIDTH_DEFAULT * BUTTON_COMPRESS_FACTOR * SCALE);
+            public static final int NPB_HEIGHT = (int) (NPB_HEIGHT_DEFAULT * BUTTON_COMPRESS_FACTOR * SCALE);
         }
     }
 }

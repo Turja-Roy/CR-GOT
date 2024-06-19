@@ -21,9 +21,9 @@ public class Menu extends State implements Statemethods {
     }
 
     private void loadButtons () {
-        buttons[0] = new MenuButtons(GAME_WIDTH*1/6, GAME_HEIGHT/2 - CELL_SIZE*2, 0, GameState.NUMPLAYER);
-        buttons[1] = new MenuButtons(GAME_WIDTH*3/6, GAME_HEIGHT/2 - CELL_SIZE*2, 1, GameState.RULES);
-        buttons[2] = new MenuButtons(GAME_WIDTH*5/6, GAME_HEIGHT/2 - CELL_SIZE*2, 2, GameState.QUIT);
+        buttons[0] = new MenuButtons(GAME_WIDTH*2/12, GAME_HEIGHT/2 + CELL_SIZE*2, 0, GameState.NUMPLAYER);
+        buttons[1] = new MenuButtons(GAME_WIDTH*5/12, GAME_HEIGHT/2 + CELL_SIZE*2, 1, GameState.RULES);
+        buttons[2] = new MenuButtons(GAME_WIDTH*8/12, GAME_HEIGHT/2 + CELL_SIZE*2, 2, GameState.QUIT);
     }
 
     @Override
@@ -69,14 +69,7 @@ public class Menu extends State implements Statemethods {
     @Override
     public void mouseMoved (MouseEvent e) {
         for (MenuButtons button : buttons)
-            button.setMouseOver(false);
-
-        for (MenuButtons button : buttons) {
-            if (isInside(e, button)) {
-                button.setMouseOver(true);
-                break;
-            }
-        }
+            button.setMouseOver(isInside(e, button));
     }
 
 }

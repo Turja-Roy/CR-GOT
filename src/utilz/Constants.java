@@ -120,7 +120,7 @@ public class Constants {
 
     // UI constants
     public static class UI {
-        public static final float BUTTON_COMPRESS_FACTOR = 0.20f;
+        public static final float BUTTON_COMPRESS_FACTOR = 0.25f;
 
         public static class MenuButtons {
             public static final int MB_PLAY = 0;
@@ -147,6 +147,12 @@ public class Constants {
             public static final int NPB_HEIGHT_DEFAULT = 304;
             public static final int NPB_WIDTH = (int) (NPB_WIDTH_DEFAULT * BUTTON_COMPRESS_FACTOR * SCALE);
             public static final int NPB_HEIGHT = (int) (NPB_HEIGHT_DEFAULT * BUTTON_COMPRESS_FACTOR * SCALE);
+        }
+
+        public static class MouseStates {
+            public static final int NORMAL = 0;
+            public static final int HOVER = 1;
+            public static final int PRESSED = 2;
         }
     }
 }

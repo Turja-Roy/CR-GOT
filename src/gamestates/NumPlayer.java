@@ -12,18 +12,16 @@ import ui.NumButtons;
 import utilz.LoadSave;
 
 public class NumPlayer extends State implements Statemethods {
-    private NumButtons[] buttons;
-    private BufferedImage background;
+    private NumButtons[] buttons = new NumButtons[8];
+    private BufferedImage bgImage;
 
     public NumPlayer (Game game) {
         super(game);
-
         loadButtons();
-        background = LoadSave.GetImage(LoadSave.INTRO_PAGE);
+        bgImage = LoadSave.GetImage(LoadSave.INTRO_PAGE);
     }
 
     private void loadButtons () {
-        buttons = new NumButtons[8];
         buttons[0] = new NumButtons(GAME_WIDTH*1/6, GAME_HEIGHT*2/6, NPB_2P, GameState.PLAYING);
         buttons[1] = new NumButtons(GAME_WIDTH*5/6, GAME_HEIGHT*2/6, NPB_3P, GameState.PLAYING);
         buttons[2] = new NumButtons(GAME_WIDTH*1/6, GAME_HEIGHT*3/6, NPB_4P, GameState.PLAYING);
@@ -42,7 +40,7 @@ public class NumPlayer extends State implements Statemethods {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(background, 0, 0, GAME_WIDTH, GAME_HEIGHT, null);
+        g.drawImage(bgImage, 0, 0, GAME_WIDTH, GAME_HEIGHT, null);
         for (NumButtons button : buttons)
             button.draw(g);
     }

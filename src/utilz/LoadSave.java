@@ -21,7 +21,7 @@ public class LoadSave {
     public static final String MENU_BUTTONS = "menuButtons.png";
     public static final String NUMP_BUTTONS = "numButtons.png";
 
-    public static final String INTRO_PAGE = "introPage.png";
+    public static final String INTRO_PAGE = "intropage.png";
 
     public static BufferedImage GetImage (String fileName) {
         BufferedImage img = null;
@@ -41,4 +41,5 @@ public class LoadSave {
 
         return img;
     }
+
 }

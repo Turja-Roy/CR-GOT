@@ -3,6 +3,7 @@ package main;
 import java.awt.Graphics;
 
 import gamestates.GameState;
+import gamestates.Menu;
 import gamestates.Playing;
 
 public class Game implements Runnable {
@@ -12,12 +13,13 @@ public class Game implements Runnable {
     private final int FPS = 120;
     private final int UPS = 200;
 
+    private Menu menu;
     private Playing playing;
     
     public Game () {
         initClasses();
 
-        gamePanel = new GamePanel();
+        gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
 
         gamePanel.requestFocus();
@@ -25,6 +27,7 @@ public class Game implements Runnable {
     }
 
     private void initClasses() {
+        menu = new Menu(this);
         playing = new Playing(this);
     }
 
@@ -36,7 +39,7 @@ public class Game implements Runnable {
     public void update () {
         switch (GameState.state) {
             case MENU:
-                
+                menu.update();
                 break;
             case PLAYING:
                 playing.update();
@@ -51,6 +54,7 @@ public class Game implements Runnable {
     public void render (Graphics g) {
         switch (GameState.state) {
             case MENU:
+                menu.draw(g);
                 break;
             case PLAYING:
                 playing.draw(g);
@@ -87,7 +91,7 @@ public class Game implements Runnable {
             }
 
             if (deltaF >= 1) {
-                render();
+                gamePanel.repaint();
                 frames++;
                 deltaF--;
             }
@@ -107,6 +111,9 @@ public class Game implements Runnable {
     }
 
     // Getters
+    public Menu getMenu () {
+        return menu;
+    }
     public Playing getPlaying () {
         return playing;
     }

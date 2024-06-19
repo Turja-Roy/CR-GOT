@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.event.WindowFocusListener;
-
 import javax.swing.JFrame;
 
 public class GameWindow extends JFrame {

@@ -12,13 +12,13 @@ public class GamePanel extends JPanel {
     private MouseInputs mouseInputs;
     private Game game;
 
-    public GamePanel () {
+    public GamePanel (Game game) {
         mouseInputs = new MouseInputs(this);
         this.game = game;
 
         setPanel();
         addMouseListener(mouseInputs);
-        // addMouseMotionListener(mouseInputs);
+        addMouseMotionListener(mouseInputs);
     }
 
     private void setPanel () {

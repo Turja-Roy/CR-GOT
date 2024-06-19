@@ -8,9 +8,10 @@ import gamestates.GameState;
 import utilz.LoadSave;
 
 import static utilz.Constants.UI.MenuButtons.*;
+import static utilz.Constants.UI.MouseStates.*;
 
 public class MenuButtons {
-    private int xPos, yPos, whichButton, index;
+    private int xPos, yPos, whichButton, mouseState;
     private GameState state;
     private BufferedImage[][] images;
     private boolean mouseOver, mousePressed;
@@ -40,13 +41,13 @@ public class MenuButtons {
     }
 
     public void update () {
-        index = 0;
-        if (mouseOver) index = 1;
-        if (mousePressed) index = 2;
+        mouseState = NORMAL;
+        if (mouseOver) mouseState = HOVER;
+        if (mousePressed) mouseState = PRESSED;
     }
 
     public void draw (Graphics g) {
-        g.drawImage(images[whichButton][index], xPos, yPos, MB_WIDTH, MB_HEIGHT, null);
+        g.drawImage(images[whichButton][mouseState], xPos, yPos, MB_WIDTH, MB_HEIGHT, null);
     }
 
     // Getters and Setters

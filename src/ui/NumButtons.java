@@ -8,9 +8,10 @@ import gamestates.GameState;
 import utilz.LoadSave;
 
 import static utilz.Constants.UI.NumPlayerButtons.*;
+import static utilz.Constants.UI.MouseStates.*;
 
 public class NumButtons {
-    private int xPos, yPos, whichButton, index;
+    private int xPos, yPos, whichButton, mouseState;
     private GameState state;
     private BufferedImage[][] images;
     private boolean mouseOver, mousePressed;
@@ -40,13 +41,13 @@ public class NumButtons {
     }
 
     public void update () {
-        index = 0;
-        if (mouseOver) index = 1;
-        if (mousePressed) index = 2;
+        mouseState = NORMAL;
+        if (mouseOver) mouseState = HOVER;
+        if (mousePressed) mouseState = PRESSED;
     }
 
     public void draw (Graphics g) {
-        g.drawImage(images[whichButton][index], xPos, yPos, NPB_WIDTH, NPB_HEIGHT, null);
+        g.drawImage(images[whichButton][mouseState], xPos, yPos, NPB_WIDTH, NPB_HEIGHT, null);
     }
 
     // Getters and Setters
@@ -65,8 +66,24 @@ public class NumButtons {
     public Rectangle getBounds () {
         return bounds;
     }
-    public int getWhichButton () {
-        return whichButton;
+
+    public int getNumPlayers () {
+        switch (whichButton) {
+            case NPB_2P:
+                return 2;
+            case NPB_3P:
+                return 3;
+            case NPB_4P:
+                return 4;
+            case NPB_5P:
+                return 5;
+            case NPB_6P:
+                return 6;
+            case NPB_7P:
+                return 7;
+            default:
+                return 0;
+        }
     }
 
     public void applyGamestate () {

@@ -120,9 +120,10 @@ public class Constants {
 
     // UI constants
     public static class UI {
-        public static final float BUTTON_COMPRESS_FACTOR = 0.25f;
 
         public static class MenuButtons {
+            public static final float BUTTON_COMPRESS_FACTOR = 0.25f;
+
             public static final int MB_PLAY = 0;
             public static final int MB_RULES = 1;
             public static final int MB_QUIT = 2;
@@ -134,14 +135,16 @@ public class Constants {
         }
 
         public static class NumPlayerButtons {
-            public static final int NPB_2P = 2;
-            public static final int NPB_3P = 3;
-            public static final int NPB_4P = 4;
-            public static final int NPB_5P = 5;
-            public static final int NPB_6P = 6;
-            public static final int NPB_7P = 7;
-            public static final int NPB_BACK = 100;
-            public static final int NPB_QUIT = 200;
+            public static final float BUTTON_COMPRESS_FACTOR = 0.22f;
+
+            public static final int NPB_2P = 0;
+            public static final int NPB_3P = 1;
+            public static final int NPB_4P = 2;
+            public static final int NPB_5P = 3;
+            public static final int NPB_6P = 4;
+            public static final int NPB_7P = 5;
+            public static final int NPB_BACK = 6;
+            public static final int NPB_QUIT = 7;
 
             public static final int NPB_WIDTH_DEFAULT = 500;
             public static final int NPB_HEIGHT_DEFAULT = 304;

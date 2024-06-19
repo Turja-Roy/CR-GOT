@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import gamestates.GameState;
 import gamestates.Menu;
+import gamestates.NumPlayer;
 import gamestates.Playing;
 
 public class Game implements Runnable {
@@ -14,6 +15,7 @@ public class Game implements Runnable {
     private final int UPS = 200;
 
     private Menu menu;
+    private NumPlayer numPlayer;
     private Playing playing;
     
     public Game () {
@@ -28,6 +30,7 @@ public class Game implements Runnable {
 
     private void initClasses() {
         menu = new Menu(this);
+        numPlayer = new NumPlayer(this);
         playing = new Playing(this);
     }
 
@@ -40,6 +43,9 @@ public class Game implements Runnable {
         switch (GameState.state) {
             case MENU:
                 menu.update();
+                break;
+            case NUMPLAYER:
+                numPlayer.update();
                 break;
             case PLAYING:
                 playing.update();
@@ -55,6 +61,9 @@ public class Game implements Runnable {
         switch (GameState.state) {
             case MENU:
                 menu.draw(g);
+                break;
+            case NUMPLAYER:
+                numPlayer.draw(g);
                 break;
             case PLAYING:
                 playing.draw(g);
@@ -113,6 +122,9 @@ public class Game implements Runnable {
     // Getters
     public Menu getMenu () {
         return menu;
+    }
+    public NumPlayer getNumPlayer () {
+        return numPlayer;
     }
     public Playing getPlaying () {
         return playing;

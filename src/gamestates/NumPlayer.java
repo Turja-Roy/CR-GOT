@@ -22,14 +22,14 @@ public class NumPlayer extends State implements Statemethods {
     }
 
     private void loadButtons () {
-        buttons[0] = new NumButtons(GAME_WIDTH*1/6, GAME_HEIGHT*2/6, NPB_2P, GameState.PLAYING);
-        buttons[1] = new NumButtons(GAME_WIDTH*5/6, GAME_HEIGHT*2/6, NPB_3P, GameState.PLAYING);
-        buttons[2] = new NumButtons(GAME_WIDTH*1/6, GAME_HEIGHT*3/6, NPB_4P, GameState.PLAYING);
-        buttons[3] = new NumButtons(GAME_WIDTH*5/6, GAME_HEIGHT*3/6, NPB_5P, GameState.PLAYING);
-        buttons[4] = new NumButtons(GAME_WIDTH*1/6, GAME_HEIGHT*4/6, NPB_6P, GameState.PLAYING);
-        buttons[5] = new NumButtons(GAME_WIDTH*5/6, GAME_HEIGHT*4/6, NPB_7P, GameState.PLAYING);
-        buttons[6] = new NumButtons(GAME_WIDTH*1/6, GAME_HEIGHT*5/6, NPB_BACK, GameState.MENU);
-        buttons[7] = new NumButtons(GAME_WIDTH*5/6, GAME_HEIGHT*5/6, NPB_QUIT, GameState.QUIT);
+        buttons[0] = new NumButtons(GAME_WIDTH*2/12, GAME_HEIGHT*2/6 - CELL_SIZE, NPB_2P, GameState.PLAYING);
+        buttons[1] = new NumButtons(GAME_WIDTH*8/12, GAME_HEIGHT*2/6 - CELL_SIZE, NPB_3P, GameState.PLAYING);
+        buttons[2] = new NumButtons(GAME_WIDTH*2/12, GAME_HEIGHT*3/6 - CELL_SIZE, NPB_4P, GameState.PLAYING);
+        buttons[3] = new NumButtons(GAME_WIDTH*8/12, GAME_HEIGHT*3/6 - CELL_SIZE, NPB_5P, GameState.PLAYING);
+        buttons[4] = new NumButtons(GAME_WIDTH*2/12, GAME_HEIGHT*4/6 - CELL_SIZE, NPB_6P, GameState.PLAYING);
+        buttons[5] = new NumButtons(GAME_WIDTH*8/12, GAME_HEIGHT*4/6 - CELL_SIZE, NPB_7P, GameState.PLAYING);
+        buttons[6] = new NumButtons(GAME_WIDTH*2/12, GAME_HEIGHT*5/6 - CELL_SIZE, NPB_BACK, GameState.MENU);
+        buttons[7] = new NumButtons(GAME_WIDTH*8/12, GAME_HEIGHT*5/6 - CELL_SIZE, NPB_QUIT, GameState.QUIT);
     }
 
     @Override
@@ -52,21 +52,16 @@ public class NumPlayer extends State implements Statemethods {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        for (NumButtons button : buttons) {
-            if (isInside(e, button)) {
-                button.setMousePressed(true);
-                game.getPlaying().setNumPlayers(button.getWhichButton());
-                break;
-            }
-        }
+        for (NumButtons button : buttons)
+            button.setMousePressed(isInside(e, button));
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         for (NumButtons button : buttons) {
-            if (isInside(e, button)) {
-                if (button.isMousePressed())
-                    button.applyGamestate();
+            if (isInside(e, button) && button.isMousePressed()) {
+                game.getPlaying().setNumPlayers(button.getNumPlayers());
+                button.applyGamestate();
                 break;
             }
         }

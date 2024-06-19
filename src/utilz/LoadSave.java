@@ -22,6 +22,7 @@ public class LoadSave {
     public static final String NUMP_BUTTONS = "numButtons.png";
 
     public static final String INTRO_PAGE = "intropage.png";
+    public static final String SCROLL = "Rules_Scroll.png";
 
     public static BufferedImage GetImage (String fileName) {
         BufferedImage img = null;

@@ -20,6 +20,13 @@ public class Constants {
         public static final int GAME_WIDTH = CELL_SIZE * CELLS_IN_WIDTH;
         public static final int GAME_HEIGHT = CELL_SIZE * CELLS_IN_HEIGHT;
     }
+
+    // Rules page constants
+    public static class RulesConstants {
+        public static final int RULES_PAGE_SCALE = (int) (GameConstants.SCALE * 0.8);
+        public static final int RULES_WIDTH = GameConstants.GAME_WIDTH * RULES_PAGE_SCALE;
+        public static final int RULES_HEIGHT = GameConstants.GAME_HEIGHT * RULES_PAGE_SCALE;
+    }
     
     // House constants
     public static class House {

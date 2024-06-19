@@ -6,6 +6,7 @@ import gamestates.GameState;
 import gamestates.Menu;
 import gamestates.NumPlayer;
 import gamestates.Playing;
+import gamestates.Rules;
 
 public class Game implements Runnable {
     private GameWindow gameWindow;
@@ -15,6 +16,7 @@ public class Game implements Runnable {
     private final int UPS = 200;
 
     private Menu menu;
+    private Rules rules;
     private NumPlayer numPlayer;
     private Playing playing;
     
@@ -30,6 +32,7 @@ public class Game implements Runnable {
 
     private void initClasses() {
         menu = new Menu(this);
+        rules = new Rules(this);
         numPlayer = new NumPlayer(this);
         playing = new Playing(this);
     }
@@ -43,6 +46,9 @@ public class Game implements Runnable {
         switch (GameState.state) {
             case MENU:
                 menu.update();
+                break;
+            case RULES:
+                rules.update();
                 break;
             case NUMPLAYER:
                 numPlayer.update();
@@ -61,6 +67,9 @@ public class Game implements Runnable {
         switch (GameState.state) {
             case MENU:
                 menu.draw(g);
+                break;
+            case RULES:
+                rules.draw(g);
                 break;
             case NUMPLAYER:
                 numPlayer.draw(g);
@@ -122,6 +131,9 @@ public class Game implements Runnable {
     // Getters
     public Menu getMenu () {
         return menu;
+    }
+    public Rules getRules () {
+        return rules;
     }
     public NumPlayer getNumPlayer () {
         return numPlayer;

@@ -1,9 +1,12 @@
 package utilz;
 
-import static utilz.Constants.GameConstants.SCALE;
+import static utilz.Constants.GameConstants.*;
 
 import java.awt.Color;
+import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 
+import player.Coor;
 import player.Player;
 
 public class Constants {
@@ -163,6 +166,13 @@ public class Constants {
             public static final int NORMAL = 0;
             public static final int HOVER = 1;
             public static final int PRESSED = 2;
+        }
+
+        public static class GameBoard {
+            public static final int GB_CENTER_X = CELL_SIZE * 5;
+            public static final int GB_CENTER_Y = CELL_SIZE * 5;
+            public static final int GB_WIDTH = CELL_SIZE * 10;
+            public static final int GB_HEIGHT = CELL_SIZE * 10;
         }
     }
 }

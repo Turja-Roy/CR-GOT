@@ -27,13 +27,13 @@ public class Player {
     public void addSigil () {
         totalSigils++;
     }
-    public void addSigils(int sigils) {
+    public void addSigil (int sigils) {
         totalSigils += sigils;
     }
     public void removeSigil () {
         totalSigils--;
     }
-    public void removeSigils(int sigils) {
+    public void removeSigil (int sigils) {
         totalSigils -= sigils;
     }
 

@@ -3,6 +3,7 @@ package gamestates;
 import java.awt.event.MouseEvent;
 
 import main.Game;
+import ui.HousePlayerButtons;
 import ui.MenuButtons;
 import ui.NumButtons;
 
@@ -18,6 +19,10 @@ public class State {
     }
 
     public boolean isInside (MouseEvent e, NumButtons button) {
+        return button.getBounds().contains(e.getX(), e.getY());
+    }
+
+    public boolean isInside (MouseEvent e, HousePlayerButtons button) {
         return button.getBounds().contains(e.getX(), e.getY());
     }
 

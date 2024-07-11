@@ -50,7 +50,7 @@ public class Constants {
         public static final Color COLOR_BLACK = new Color(0, 0, 0);
         public static final Color COLOR_TARGARYEN = new Color(255, 0, 0);
         public static final Color COLOR_STARK = new Color(128, 128, 128);
-        public static final Color COLOR_LANNISTER = new Color(255, 215, 0);
+        public static final Color COLOR_LANNISTER = new Color(255, 185, 0);
         public static final Color COLOR_BARATHEON = new Color(255, 255, 0);
         public static final Color COLOR_TYRELL = new Color(0, 255, 0);
         public static final Color COLOR_ARRYN = new Color(0, 255, 255);
@@ -132,7 +132,7 @@ public class Constants {
     public static class UI {
 
         public static class MenuButtons {
-            public static final float BUTTON_COMPRESS_FACTOR = 0.25f;
+            public static final float BUTTON_COMPRESSION_FACTOR = 0.25f;
 
             public static final int MB_PLAY = 0;
             public static final int MB_RULES = 1;
@@ -140,12 +140,12 @@ public class Constants {
 
             public static final int MB_WIDTH_DEFAULT = 469;
             public static final int MB_HEIGHT_DEFAULT = 304;
-            public static final int MB_WIDTH = (int) (MB_WIDTH_DEFAULT * BUTTON_COMPRESS_FACTOR * SCALE);
-            public static final int MB_HEIGHT = (int) (MB_HEIGHT_DEFAULT * BUTTON_COMPRESS_FACTOR * SCALE);
+            public static final int MB_WIDTH = (int) (MB_WIDTH_DEFAULT * BUTTON_COMPRESSION_FACTOR * SCALE);
+            public static final int MB_HEIGHT = (int) (MB_HEIGHT_DEFAULT * BUTTON_COMPRESSION_FACTOR * SCALE);
         }
 
         public static class NumPlayerButtons {
-            public static final float BUTTON_COMPRESS_FACTOR = 0.22f;
+            public static final float BUTTON_COMPRESSION_FACTOR = 0.22f;
 
             public static final int NPB_2P = 0;
             public static final int NPB_3P = 1;
@@ -158,14 +158,56 @@ public class Constants {
 
             public static final int NPB_WIDTH_DEFAULT = 500;
             public static final int NPB_HEIGHT_DEFAULT = 304;
-            public static final int NPB_WIDTH = (int) (NPB_WIDTH_DEFAULT * BUTTON_COMPRESS_FACTOR * SCALE);
-            public static final int NPB_HEIGHT = (int) (NPB_HEIGHT_DEFAULT * BUTTON_COMPRESS_FACTOR * SCALE);
+            public static final int NPB_WIDTH = (int) (NPB_WIDTH_DEFAULT * BUTTON_COMPRESSION_FACTOR * SCALE);
+            public static final int NPB_HEIGHT = (int) (NPB_HEIGHT_DEFAULT * BUTTON_COMPRESSION_FACTOR * SCALE);
+        }
+
+        public static class HousePlayerSelectionButtons {
+            // Player selection buttons
+            public static final float PSB_BUTTON_COMPRESSION_FACTOR = 0.18f;
+
+            public static final int PSB_P1 = 0;
+            public static final int PSB_P2 = 1;
+            public static final int PSB_P3 = 2;
+            public static final int PSB_P4 = 3;
+            public static final int PSB_P5 = 4;
+            public static final int PSB_P6 = 5;
+            public static final int PSB_P7 = 6;
+
+            public static final int PSB_BACK = 7;
+            public static final int PSB_QUIT = 8;
+            public static final int PSB_START = 9;
+
+            public static final int PSB_WIDTH_DEFAULT = 500;
+            public static final int PSB_HEIGHT_DEFAULT = 304;
+            public static final int PSB_WIDTH = (int) (PSB_WIDTH_DEFAULT * PSB_BUTTON_COMPRESSION_FACTOR * SCALE);
+            public static final int PSB_HEIGHT = (int) (PSB_HEIGHT_DEFAULT * PSB_BUTTON_COMPRESSION_FACTOR * SCALE);
+
+            // House selection buttons
+            public static final float HSB_BUTTON_COMPRESSION_FACTOR = 0.35f;
+
+            public static final int HSB_TARGARYEN = 10;
+            public static final int HSB_STARK = 11;
+            public static final int HSB_LANNISTER = 12;
+            public static final int HSB_BARATHEON = 13;
+            public static final int HSB_TYRELL = 14;
+            public static final int HSB_ARRYN = 15;
+            public static final int HSB_GREYJOY = 16;
+            public static final int HSB_MARTELL = 17;
+            public static final int HSB_TULLY = 18;
+            public static final int HSB_BOLTON = 19;
+
+            public static final int HSB_WIDTH_DEFAULT = 500;
+            public static final int HSB_HEIGHT_DEFAULT = 100;
+            public static final int HSB_WIDTH = (int) (HSB_WIDTH_DEFAULT * HSB_BUTTON_COMPRESSION_FACTOR * SCALE);
+            public static final int HSB_HEIGHT = (int) (HSB_HEIGHT_DEFAULT * HSB_BUTTON_COMPRESSION_FACTOR * SCALE);
         }
 
         public static class MouseStates {
             public static final int NORMAL = 0;
             public static final int HOVER = 1;
             public static final int PRESSED = 2;
+            public static final int CLICKED = 3;
         }
 
         public static class GameBoard {

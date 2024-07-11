@@ -11,6 +11,11 @@ public class Player {
         this.house = house;
         totalSigils = 0;
     }
+    public Player(int id) {
+        this.id = id;
+        house = 0;
+        totalSigils = 0;
+    }
 
     // Getters
     public int getId () {

@@ -20,6 +20,8 @@ public class LoadSave {
 
     public static final String MENU_BUTTONS = "menuButtons.png";
     public static final String NUMP_BUTTONS = "numButtons.png";
+    public static final String PLAYER_SELECTION_BUTTONS = "playerSelectionButtons.png";
+    public static final String HOUSE_SELECTION_BUTTONS = "houseSelectionButtons.png";
 
     public static final String INTRO_PAGE = "intropage.png";
     public static final String SCROLL = "Rules_Scroll.png";

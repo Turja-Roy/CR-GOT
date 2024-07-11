@@ -53,10 +53,18 @@ public class Playing extends State implements Statemethods {
     }
 
     // Getters and Setters
+    public Player[] getPlayers () {
+        return players;
+    }
     public int getNumPlayers () {
         return numPlayers;
     }
     public void setNumPlayers (int numPlayers) {
         this.numPlayers = numPlayers;
+
+        // Initialize players
+        players = new Player[numPlayers];
+        for (int i=0 ; i<numPlayers ; i++)
+            players[i] = new Player(i);
     }
 }

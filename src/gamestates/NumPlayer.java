@@ -22,12 +22,12 @@ public class NumPlayer extends State implements Statemethods {
     }
 
     private void loadButtons () {
-        buttons[0] = new NumButtons(GAME_WIDTH*2/12, GAME_HEIGHT*2/6 - CELL_SIZE, NPB_2P, GameState.PLAYING);
-        buttons[1] = new NumButtons(GAME_WIDTH*8/12, GAME_HEIGHT*2/6 - CELL_SIZE, NPB_3P, GameState.PLAYING);
-        buttons[2] = new NumButtons(GAME_WIDTH*2/12, GAME_HEIGHT*3/6 - CELL_SIZE, NPB_4P, GameState.PLAYING);
-        buttons[3] = new NumButtons(GAME_WIDTH*8/12, GAME_HEIGHT*3/6 - CELL_SIZE, NPB_5P, GameState.PLAYING);
-        buttons[4] = new NumButtons(GAME_WIDTH*2/12, GAME_HEIGHT*4/6 - CELL_SIZE, NPB_6P, GameState.PLAYING);
-        buttons[5] = new NumButtons(GAME_WIDTH*8/12, GAME_HEIGHT*4/6 - CELL_SIZE, NPB_7P, GameState.PLAYING);
+        buttons[0] = new NumButtons(GAME_WIDTH*2/12, GAME_HEIGHT*2/6 - CELL_SIZE, NPB_2P, GameState.HOUSE_SELECTION);
+        buttons[1] = new NumButtons(GAME_WIDTH*8/12, GAME_HEIGHT*2/6 - CELL_SIZE, NPB_3P, GameState.HOUSE_SELECTION);
+        buttons[2] = new NumButtons(GAME_WIDTH*2/12, GAME_HEIGHT*3/6 - CELL_SIZE, NPB_4P, GameState.HOUSE_SELECTION);
+        buttons[3] = new NumButtons(GAME_WIDTH*8/12, GAME_HEIGHT*3/6 - CELL_SIZE, NPB_5P, GameState.HOUSE_SELECTION);
+        buttons[4] = new NumButtons(GAME_WIDTH*2/12, GAME_HEIGHT*4/6 - CELL_SIZE, NPB_6P, GameState.HOUSE_SELECTION);
+        buttons[5] = new NumButtons(GAME_WIDTH*8/12, GAME_HEIGHT*4/6 - CELL_SIZE, NPB_7P, GameState.HOUSE_SELECTION);
         buttons[6] = new NumButtons(GAME_WIDTH*2/12, GAME_HEIGHT*5/6 - CELL_SIZE, NPB_BACK, GameState.MENU);
         buttons[7] = new NumButtons(GAME_WIDTH*8/12, GAME_HEIGHT*5/6 - CELL_SIZE, NPB_QUIT, GameState.QUIT);
     }
@@ -70,7 +70,7 @@ public class NumPlayer extends State implements Statemethods {
 
     private void resetButtons() {
         for (NumButtons button : buttons)
-            button.setMousePressed(false);
+            button.resetBools();
     }
 
     @Override

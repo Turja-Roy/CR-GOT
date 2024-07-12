@@ -13,7 +13,7 @@ public class Player {
     }
     public Player(int id) {
         this.id = id;
-        house = 0;
+        house = -1;
         totalSigils = 0;
     }
 

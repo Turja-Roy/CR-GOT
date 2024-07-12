@@ -5,6 +5,8 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import gamestates.GameState;
+import main.Game;
+import player.Player;
 import utilz.LoadSave;
 
 import static utilz.Constants.UI.HousePlayerSelectionButtons.*;
@@ -99,7 +101,21 @@ public class HousePlayerButtons {
         mouseOver = mousePressed = mouseClicked = false;
     }
 
-    public void applyGamestate () {
-        GameState.state = state;
+    public boolean applyGamestate (Game game) {
+        boolean pass = true;
+
+        if (state == GameState.NUMPLAYER || state == GameState.QUIT)
+            GameState.state = state;
+
+        else if (state == GameState.PLAYING) {
+            Player[] players = game.getPlaying().getPlayers();
+            for (Player player : players)
+                if (player.getHouse() == -1)
+                    pass = false;
+
+            if (pass) GameState.state = state;
+        } 
+
+        return pass;
     }
 }

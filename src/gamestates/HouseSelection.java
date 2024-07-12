@@ -35,7 +35,7 @@ public class HouseSelection extends State implements Statemethods {
         playerButtons[6] = new HousePlayerButtons(GAME_WIDTH*3/12, (int) (GAME_HEIGHT*6.5/12), PSB_P7, null);
         playerButtons[7] = new HousePlayerButtons(GAME_WIDTH*2/12, (int) (GAME_HEIGHT*8.0/12), PSB_BACK, GameState.NUMPLAYER);
         playerButtons[8] = new HousePlayerButtons(GAME_WIDTH*4/12, (int) (GAME_HEIGHT*8.0/12), PSB_QUIT, GameState.QUIT);
-        playerButtons[9] = new HousePlayerButtons(GAME_WIDTH*6/12, (int) (GAME_HEIGHT*6.0/12), PSB_START, GameState.PLAYING);
+        playerButtons[9] = new HousePlayerButtons(GAME_WIDTH*6/12, (int) (GAME_HEIGHT*5.0/12), PSB_START, GameState.PLAYING);
     }
 
     private void loadHouseButtons () {
@@ -140,10 +140,11 @@ public class HouseSelection extends State implements Statemethods {
 
     @Override
     public void mouseReleased (MouseEvent e) {
+        boolean pass = false;
         for (int i=7 ; i<=9 ; i++) {
             if (isInside(e, playerButtons[i]) && playerButtons[i].isMousePressed()) {
-                playerButtons[i].applyGamestate();
-                resetButtons();
+                pass = playerButtons[i].applyGamestate(game);
+                if (pass) resetButtons();
                 break;
             }
             playerButtons[i].resetBools();

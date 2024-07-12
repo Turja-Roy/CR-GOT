@@ -3,6 +3,8 @@ package gamestates;
 import static utilz.Constants.GameConstants.*;
 import static utilz.Constants.UI.HousePlayerSelectionButtons.*;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -68,6 +70,10 @@ public class HouseSelection extends State implements Statemethods {
         int numPlayers = game.getPlaying().getNumPlayers();
 
         g.drawImage(bgImage, 0, 0, GAME_WIDTH, GAME_HEIGHT, null);
+
+        g.setFont(new Font("Book Antiqua", Font.BOLD, 30));
+        g.setColor(new Color(255, 255, 255));
+        g.drawString("Select your house", (int) (GAME_WIDTH*2.5/12), GAME_HEIGHT*1/12);
 
         for (int i=0 ; i<numPlayers ; i++)
             playerButtons[i].draw(g);

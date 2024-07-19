@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import gamestates.GameState;
 import main.Game;
+import player.GameData;
 import player.Player;
 import utilz.LoadSave;
 
@@ -108,7 +109,8 @@ public class HousePlayerButtons {
             GameState.state = state;
 
         else if (state == GameState.PLAYING) {
-            Player[] players = game.getPlaying().getPlayers();
+            Player[] players = GameData.players;
+            // Player[] players = game.getPlaying().getPlayers();
             for (Player player : players)
                 if (player.getHouse() == -1)
                     pass = false;

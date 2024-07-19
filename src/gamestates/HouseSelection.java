@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import main.Game;
+import player.GameData;
 import ui.HousePlayerButtons;
 import utilz.LoadSave;
 
@@ -55,7 +56,7 @@ public class HouseSelection extends State implements Statemethods {
 
     @Override
     public void update () {
-        int numPlayers = game.getPlaying().getNumPlayers();
+        int numPlayers = GameData.numPlayers;
 
         for (int i=0 ; i<numPlayers ; i++)
             playerButtons[i].update();
@@ -67,7 +68,7 @@ public class HouseSelection extends State implements Statemethods {
 
     @Override
     public void draw (Graphics g) {
-        int numPlayers = game.getPlaying().getNumPlayers();
+        int numPlayers = GameData.numPlayers;
 
         g.drawImage(bgImage, 0, 0, GAME_WIDTH, GAME_HEIGHT, null);
 
@@ -85,7 +86,7 @@ public class HouseSelection extends State implements Statemethods {
 
     @Override
     public void mouseClicked (MouseEvent e) {
-        int numPlayers = game.getPlaying().getNumPlayers();
+        int numPlayers = GameData.numPlayers;
 
         for (int i=0 ; i<numPlayers ; i++) {
             HousePlayerButtons button = playerButtons[i];
@@ -105,7 +106,8 @@ public class HouseSelection extends State implements Statemethods {
                 }
                 else {
                     button.setMouseClicked(true);
-                    game.getPlaying().getPlayers()[button.getWhichButton()].setHouse(houseButtonOnHold - PSB_START - 1);
+                    GameData.players[button.getWhichButton()].setHouse(houseButtonOnHold - PSB_START - 1);
+                    // game.getPlaying().getPlayers()[button.getWhichButton()].setHouse(houseButtonOnHold - PSB_START - 1);
                     houseButtonClicked = playerButtonClicked = false;
                     playerButtonOnHold = houseButtonOnHold = -1;
                 }
@@ -130,7 +132,8 @@ public class HouseSelection extends State implements Statemethods {
                 }
                 else {
                     button.setMouseClicked(true);
-                    game.getPlaying().getPlayers()[playerButtonOnHold].setHouse(button.getWhichButton() - PSB_START - 1);
+                    GameData.players[playerButtonOnHold].setHouse(button.getWhichButton() - PSB_START - 1);
+                    // game.getPlaying().getPlayers()[playerButtonOnHold].setHouse(button.getWhichButton() - PSB_START - 1);
                     playerButtonClicked = houseButtonClicked = false;
                     playerButtonOnHold = houseButtonOnHold = -1;
                 }
@@ -151,6 +154,7 @@ public class HouseSelection extends State implements Statemethods {
             if (isInside(e, playerButtons[i]) && playerButtons[i].isMousePressed()) {
                 pass = playerButtons[i].applyGamestate(game);
                 if (pass) resetButtons();
+                // if (i == 9) game.getPlaying().printStats();
                 break;
             }
             playerButtons[i].resetBools();

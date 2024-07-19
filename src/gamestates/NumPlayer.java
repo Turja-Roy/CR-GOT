@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import main.Game;
+import player.GameData;
 import ui.NumButtons;
 import utilz.LoadSave;
 
@@ -60,7 +61,8 @@ public class NumPlayer extends State implements Statemethods {
     public void mouseReleased(MouseEvent e) {
         for (NumButtons button : buttons) {
             if (isInside(e, button) && button.isMousePressed()) {
-                game.getPlaying().setNumPlayers(button.getNumPlayers());
+                GameData.numPlayers = button.getNumPlayers();
+                GameData.initPlayers();
                 button.applyGamestate();
                 break;
             }

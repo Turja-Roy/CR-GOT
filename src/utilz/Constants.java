@@ -33,16 +33,16 @@ public class Constants {
     
     // House constants
     public static class House {
-        public static final int TARGARYEN = 1;
-        public static final int STARK = 2;
-        public static final int LANNISTER = 3;
-        public static final int BARATHEON = 4;
-        public static final int TYRELL = 5;
-        public static final int ARRYN = 6;
-        public static final int GREYJOY = 7;
-        public static final int MARTELL = 8;
-        public static final int TULLY = 9;
-        public static final int BOLTON = 10;
+        public static final int TARGARYEN = 0;
+        public static final int STARK = 1;
+        public static final int LANNISTER = 2;
+        public static final int BARATHEON = 3;
+        public static final int TYRELL = 4;
+        public static final int ARRYN = 5;
+        public static final int GREYJOY = 6;
+        public static final int MARTELL = 7;
+        public static final int TULLY = 8;
+        public static final int BOLTON = 9;
     }
 
     // Color constants

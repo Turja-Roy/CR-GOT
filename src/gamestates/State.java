@@ -1,5 +1,8 @@
 package gamestates;
 
+import static utilz.Constants.GameConstants.CELL_SIZE;
+
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
 import main.Game;
@@ -24,6 +27,11 @@ public class State {
 
     public boolean isInside (MouseEvent e, HousePlayerButtons button) {
         return button.getBounds().contains(e.getX(), e.getY());
+    }
+
+    public boolean insideBoard (MouseEvent e) {
+        Rectangle bounds = new Rectangle(0, 0, CELL_SIZE*10, CELL_SIZE*10);
+        return bounds.contains(e.getX(), e.getY());
     }
 
     public Game getGame () {

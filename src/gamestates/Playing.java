@@ -1,40 +1,56 @@
 package gamestates;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
+import player.GameData;
+import player.Grid;
 import player.Player;
+import utilz.LoadSave;
 import main.Game;
+import static utilz.Constants.GameConstants.*;
 
 public class Playing extends State implements Statemethods {
-    private Player[] players;
-    private int numPlayers;
-    private int round;
+    private boolean paused = false;
+    private BufferedImage mapImage;
 
     public Playing (Game game) {
         super(game);
-        initClasses();
-    }
-
-    private void initClasses () {
-        // players = new Player[2];
-        // players[0] = new Player(game, 1);
-        // players[1] = new Player(game, 2);
+        mapImage = LoadSave.GetImage(LoadSave.MAP_IMAGE);
     }
 
     @Override
     public void update () {
-        // TODO Auto-generated method stub
+        if (GameData.round == 0) GameData.currPlayer = GameData.players[0];
+        if (GameData.round == 0) GameData.printStates();
     }
 
     @Override
     public void draw (Graphics g) {
-        // TODO Auto-generated method stub
+        Graphics2D g2d = (Graphics2D) g;
+        drawGrid(g2d, GameData.players[0]);
+        g.drawImage(mapImage, CELL_SIZE*10, 0, CELL_SIZE*8+2, CELL_SIZE*10, null);
+    }
+
+    private void drawGrid (Graphics2D g, Player player) {
+        g.setColor(player.getColor());
+        g.fillRect(0, 0, CELL_SIZE*10+2, CELL_SIZE*10+2);
+        g.setColor(Color.BLACK);
+
+        for (int i=0 ; i<10 ; i++) {
+            for (int j=0 ; j<10 ; j++) {
+                g.fillRect(i*CELL_SIZE+1, j*CELL_SIZE+1, CELL_SIZE-1, CELL_SIZE-1);
+            }
+        }
     }
 
     @Override
     public void mouseClicked (MouseEvent e) {
-        // TODO Auto-generated method stub
+        if (insideBoard(e))
+            GameData.grid.addSigil(GameData.grid.getCell(e), GameData.currPlayer);
     }
 
     @Override
@@ -50,21 +66,5 @@ public class Playing extends State implements Statemethods {
     @Override
     public void mouseMoved (MouseEvent e) {
         // TODO Auto-generated method stub
-    }
-
-    // Getters and Setters
-    public Player[] getPlayers () {
-        return players;
-    }
-    public int getNumPlayers () {
-        return numPlayers;
-    }
-    public void setNumPlayers (int numPlayers) {
-        this.numPlayers = numPlayers;
-
-        // Initialize players
-        players = new Player[numPlayers];
-        for (int i=0 ; i<numPlayers ; i++)
-            players[i] = new Player(i);
     }
 }

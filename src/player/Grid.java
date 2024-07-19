@@ -8,7 +8,6 @@ import java.awt.event.MouseEvent;
 
 public class Grid {
     private Cell[][] grid = new Cell[10][10];
-    private int numPlayers;
 
     public final Rectangle gridBounds = new Rectangle(GB_CENTER_X - GB_WIDTH / 2, GB_CENTER_Y - GB_HEIGHT / 2, GB_WIDTH, GB_HEIGHT);
 
@@ -18,23 +17,9 @@ public class Grid {
                 grid[i][j] = new Cell(new Coor(i, j));
     }
 
-    public Coor getCellCoor (MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
-
-        if (x < GB_CENTER_X - GB_WIDTH / 2 || x > GB_CENTER_X + GB_WIDTH / 2 ||
-            y < GB_CENTER_Y - GB_HEIGHT / 2 || y > GB_CENTER_Y + GB_HEIGHT / 2)
-            return null;
-
-        int rowIndex = (y - GB_CENTER_Y + GB_HEIGHT / 2) / CELL_SIZE;
-        int colIndex = (x - GB_CENTER_X + GB_WIDTH / 2) / CELL_SIZE;
-
-        return new Coor(rowIndex, colIndex);
-    }
-
-    public void addSigil (Cell cell, Player player) { // Not exploding
+    public boolean addSigil (Cell cell, Player player) { // Not exploding
         if ( !cell.isEmpty() && !cell.isOccupiedBy(player) )
-            return;
+            return false;
 
         player.addSigil();
         if ( !cell.isExplodable() ) {
@@ -46,6 +31,8 @@ public class Grid {
         else {
             explode(cell, player);
         }
+
+        return true;
     }
 
     public void addSigil (Cell cell, Player player, boolean isExploding) { // Exploding
@@ -81,5 +68,23 @@ public class Grid {
     // Getters
     public Cell getCell (Coor coor) {
         return grid[coor.rowIndex][coor.colIndex];
+    }
+    public Cell getCell (MouseEvent e) {
+        Coor coor = getCellCoor(e);
+        return grid[coor.rowIndex][coor.colIndex];
+    }
+
+    public Coor getCellCoor (MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+
+        if (x < GB_CENTER_X - GB_WIDTH / 2 || x > GB_CENTER_X + GB_WIDTH / 2 ||
+            y < GB_CENTER_Y - GB_HEIGHT / 2 || y > GB_CENTER_Y + GB_HEIGHT / 2)
+            return null;
+
+        int rowIndex = (y - GB_CENTER_Y + GB_HEIGHT / 2) / CELL_SIZE;
+        int colIndex = (x - GB_CENTER_X + GB_WIDTH / 2) / CELL_SIZE;
+
+        return new Coor(rowIndex, colIndex);
     }
 }

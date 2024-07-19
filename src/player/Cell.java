@@ -6,6 +6,7 @@ public class Cell {
     private int sigilCount;
 
     Cell (Coor coor, Player player, int sigilCount) {
+        this.coor = coor;
         this.player = player;
         this.sigilCount = sigilCount;
     }

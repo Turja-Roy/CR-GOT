@@ -1,5 +1,9 @@
 package player;
 
+import java.awt.Color;
+
+import utilz.Constants;
+
 public class Player {
     private int id;
     private int house;
@@ -26,6 +30,14 @@ public class Player {
     }
     public int getTotalSigils () {
         return totalSigils;
+    }
+
+    public String toString () {
+        return "Player " + id + " is from House " + house + " and has " + totalSigils + " sigils.";
+    }
+
+    public Color getColor () {
+        return Constants.Colors.getColor(this);
     }
 
     // Operations

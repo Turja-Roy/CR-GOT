@@ -69,6 +69,9 @@ public class Grid {
     public Cell getCell (Coor coor) {
         return grid[coor.rowIndex][coor.colIndex];
     }
+    public Cell getCell (int rowIndex, int colIndex) {
+        return grid[rowIndex][colIndex];
+    }
     public Cell getCell (MouseEvent e) {
         Coor coor = getCellCoor(e);
         return grid[coor.rowIndex][coor.colIndex];

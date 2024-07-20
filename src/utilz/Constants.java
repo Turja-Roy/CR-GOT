@@ -3,10 +3,8 @@ package utilz;
 import static utilz.Constants.GameConstants.*;
 
 import java.awt.Color;
-import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
+import java.awt.Graphics;
 
-import player.Coor;
 import player.Player;
 
 public class Constants {
@@ -29,6 +27,63 @@ public class Constants {
         public static final int RULES_PAGE_SCALE = (int) (GameConstants.SCALE * 0.8);
         public static final int RULES_WIDTH = GameConstants.GAME_WIDTH * RULES_PAGE_SCALE;
         public static final int RULES_HEIGHT = GameConstants.GAME_HEIGHT * RULES_PAGE_SCALE;
+    }
+
+    // Flags and Sigils Constants
+    public static class PlayingConstants {
+        public static class Sigils {
+            public static final int SIGIL_WIDTH_DEFAULT = 250;
+            public static final int SIGIL_HEIGHT_DEFAULT = 250;
+
+            public static final int SIGIL_SIZE = (int) (CELL_SIZE*0.5);
+
+            public static final int SINGLE_SIGIL_X_POS = (int) (CELL_SIZE * 0.5);
+            public static final int SINGLE_SIGIL_Y_POS = (int) (CELL_SIZE * 0.5);
+
+            public static final int DOUBLE_SIGIL_X_POS_1 = (int) (CELL_SIZE * 0.3);
+            public static final int DOUBLE_SIGIL_Y_POS_1 = (int) (CELL_SIZE * 0.7);
+            public static final int DOUBLE_SIGIL_X_POS_2 = (int) (CELL_SIZE * 0.5);
+            public static final int DOUBLE_SIGIL_Y_POS_2 = (int) (CELL_SIZE * 0.5);
+
+            public static final int TRIPLE_SIGIL_X_POS_1 = (int) (CELL_SIZE * 0.3);
+            public static final int TRIPLE_SIGIL_Y_POS_1 = (int) (CELL_SIZE * 0.3);
+            public static final int TRIPLE_SIGIL_X_POS_2 = (int) (CELL_SIZE * 0.5);
+            public static final int TRIPLE_SIGIL_Y_POS_2 = (int) (CELL_SIZE * 0.6);
+            public static final int TRIPLE_SIGIL_X_POS_3 = (int) (CELL_SIZE * 0.7);
+            public static final int TRIPLE_SIGIL_Y_POS_3 = (int) (CELL_SIZE * 0.3);
+        }
+
+        public static class Flags {
+            public static final int FLAG_WIDTH_DEFAULT = 250;
+            public static final int FLAG_HEIGHT_DEFAULT = 275;
+
+            public static final int FLAG_WIDTH = (int) (CELL_SIZE * 0.65);
+            public static final int FLAG_HEIGHT = (int) (CELL_SIZE * 0.75);
+
+            public static final int TARGARYEN_X = (int) (CELL_SIZE * 14.5);
+            public static final int TARGARYEN_Y = (int) (CELL_SIZE * 6.75);
+
+            public static final int STARK_X = (int) (CELL_SIZE * 13.5);
+            public static final int STARK_Y = (int) (CELL_SIZE * 2.50);
+
+            public static final int LANNISTER_X = (int) (CELL_SIZE * 11.5);
+            public static final int LANNISTER_Y = (int) (CELL_SIZE * 6.50);
+
+            public static final int BARATHEON_X = (int) (CELL_SIZE * 15.5);
+            public static final int BARATHEON_Y = (int) (CELL_SIZE * 6.50);
+
+            public static final int TYRELL_X = (int) (CELL_SIZE * 12.0);
+            public static final int TYRELL_Y = (int) (CELL_SIZE * 8.25);
+
+            public static final int ARRYN_X = (int) (CELL_SIZE * 15.25);
+            public static final int ARRYN_Y = (int) (CELL_SIZE * 5.00);
+
+            public static final int GREYJOY_X = (int) (CELL_SIZE * 11.75);
+            public static final int GREYJOY_Y = (int) (CELL_SIZE * 5.25);
+
+            public static final int[] FLAG_X_POS = {TARGARYEN_X, STARK_X, LANNISTER_X, BARATHEON_X, TYRELL_X, ARRYN_X, GREYJOY_X};
+            public static final int[] FLAG_Y_POS = {TARGARYEN_Y, STARK_Y, LANNISTER_Y, BARATHEON_Y, TYRELL_Y, ARRYN_Y, GREYJOY_Y};
+        }
     }
     
     // House constants

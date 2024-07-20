@@ -20,6 +20,8 @@ public class HouseSelection extends State implements Statemethods {
     private BufferedImage bgImage;
     private boolean playerButtonClicked=false, houseButtonClicked=false;
     private int playerButtonOnHold=-1, houseButtonOnHold=-1;
+
+    private static boolean firstClick = true;
     
     public HouseSelection (Game game) {
         super(game);
@@ -86,6 +88,10 @@ public class HouseSelection extends State implements Statemethods {
 
     @Override
     public void mouseClicked (MouseEvent e) {
+        if (firstClick) {
+            firstClick = false;
+            return;
+        }
         int numPlayers = GameData.numPlayers;
 
         for (int i=0 ; i<numPlayers ; i++) {
@@ -153,8 +159,11 @@ public class HouseSelection extends State implements Statemethods {
         for (int i=7 ; i<=9 ; i++) {
             if (isInside(e, playerButtons[i]) && playerButtons[i].isMousePressed()) {
                 pass = playerButtons[i].applyGamestate(game);
-                if (pass) resetButtons();
-                // if (i == 9) game.getPlaying().printStats();
+                if (pass) {
+                    firstClick = true;
+                    resetButtons();
+                    GameData.initHouses();
+                }
                 break;
             }
             playerButtons[i].resetBools();

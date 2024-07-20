@@ -157,4 +157,13 @@ public class Game implements Runnable {
     public HouseSelection getHouseSelection () {
         return houseSelection;
     }
+
+    // Give a break
+    public void giveAbreak (long milis) {
+        try {
+            thread.sleep(milis);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    }
 }

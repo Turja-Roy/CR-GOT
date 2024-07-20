@@ -57,4 +57,55 @@ public class LoadSave {
         return img;
     }
 
+    public static BufferedImage[] GetSigils () {
+        BufferedImage[] sigilImages = new BufferedImage[10];
+        String[] sigilStrings = { SIGIL_TARGARYEN, SIGIL_STARK, SIGIL_LANNISTER, SIGIL_BARATHEON, SIGIL_TYRELL, SIGIL_ARRYN, SIGIL_GREYJOY, SIGIL_MARTELL, SIGIL_TULLY, SIGIL_BOLTON };
+
+        for (int i=0 ; i<7 ; i++) {
+            BufferedImage img = null;
+            InputStream is = LoadSave.class.getResourceAsStream("/images/" + sigilStrings[i]);
+
+            try {
+                img = ImageIO.read(is);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    is.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            sigilImages[i] = img;
+        }
+
+        return sigilImages;
+    }
+
+    public static BufferedImage[] GetFlags () {
+        BufferedImage[] flagImages = new BufferedImage[10];
+        String[] flagStrings = { FLAG_TARGARYEN, FLAG_STARK, FLAG_LANNISTER, FLAG_BARATHEON, FLAG_TYRELL, FLAG_ARRYN, FLAG_GREYJOY, FLAG_MARTELL, FLAG_TULLY, FLAG_BOLTON };
+
+        for (int i=0 ; i<7 ; i++) {
+            BufferedImage img = null;
+            InputStream is = LoadSave.class.getResourceAsStream("/images/" + flagStrings[i]);
+
+            try {
+                img = ImageIO.read(is);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    is.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            flagImages[i] = img;
+        }
+
+        return flagImages;
+    }
 }

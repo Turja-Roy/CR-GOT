@@ -7,36 +7,49 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import player.GameData;
-import player.Grid;
+import static player.GameData.currPlayer;
 import player.Player;
 import utilz.LoadSave;
 import main.Game;
 import static utilz.Constants.GameConstants.*;
+import static utilz.Constants.PlayingConstants.Flags.*;
+import static utilz.Constants.PlayingConstants.Sigils.*;
 
 public class Playing extends State implements Statemethods {
     private boolean paused = false;
     private BufferedImage mapImage;
+    private BufferedImage[] sigils = new BufferedImage[7];
+    private BufferedImage[] flags = new BufferedImage[7];
+
+    private static boolean firstClick = true;
 
     public Playing (Game game) {
         super(game);
         mapImage = LoadSave.GetImage(LoadSave.MAP_IMAGE);
+
+        sigils = LoadSave.GetSigils();
+        flags = LoadSave.GetFlags();
     }
 
     @Override
     public void update () {
-        if (GameData.round == 0) GameData.currPlayer = GameData.players[0];
-        if (GameData.round == 0) GameData.printStates();
+
     }
 
     @Override
     public void draw (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        drawGrid(g2d, GameData.players[0]);
+
+        drawGrid(g2d);
+        drawSigils(g);
         g.drawImage(mapImage, CELL_SIZE*10, 0, CELL_SIZE*8+2, CELL_SIZE*10, null);
+
+        for (int house : GameData.houses)
+            g.drawImage(flags[house], FLAG_X_POS[house], FLAG_Y_POS[house], FLAG_WIDTH, FLAG_HEIGHT, null);
     }
 
-    private void drawGrid (Graphics2D g, Player player) {
-        g.setColor(player.getColor());
+    private void drawGrid (Graphics2D g) {
+        g.setColor(GameData.players[currPlayer].getColor());
         g.fillRect(0, 0, CELL_SIZE*10+2, CELL_SIZE*10+2);
         g.setColor(Color.BLACK);
 
@@ -47,10 +60,39 @@ public class Playing extends State implements Statemethods {
         }
     }
 
+    private void drawSigils (Graphics g) {
+        for (int i=0 ; i<10 ; i++) {
+            for (int j=0 ; j<10 ; j++) {
+                if (GameData.grid.getCell(j,i).getPlayer() == null) continue;
+
+                int house = GameData.grid.getCell(j,i).getPlayer().getHouse();
+
+                if (GameData.grid.getCell(j,i).getSigilCount() == 1) {
+                    g.drawImage(sigils[house], (int) (CELL_SIZE*i - CELL_SIZE*0.25 + SINGLE_SIGIL_X_POS), (int) (CELL_SIZE*j - CELL_SIZE*0.25 + SINGLE_SIGIL_Y_POS), SIGIL_SIZE, SIGIL_SIZE, null);
+                }
+                else if (GameData.grid.getCell(j,i).getSigilCount() == 2) {
+                    g.drawImage(sigils[house], (int) (CELL_SIZE*i - CELL_SIZE*0.25 + DOUBLE_SIGIL_X_POS_1), (int) (CELL_SIZE*j - CELL_SIZE*0.25 + DOUBLE_SIGIL_Y_POS_1), SIGIL_SIZE, SIGIL_SIZE, null);
+                    g.drawImage(sigils[house], (int) (CELL_SIZE*i - CELL_SIZE*0.25 + DOUBLE_SIGIL_X_POS_2), (int) (CELL_SIZE*j - CELL_SIZE*0.25 + DOUBLE_SIGIL_Y_POS_2), SIGIL_SIZE, SIGIL_SIZE, null);
+                }
+                else if (GameData.grid.getCell(j,i).getSigilCount() == 3) {
+                    g.drawImage(sigils[house], (int) (CELL_SIZE*i - CELL_SIZE*0.25 + TRIPLE_SIGIL_X_POS_1), (int) (CELL_SIZE*j - CELL_SIZE*0.25 + TRIPLE_SIGIL_Y_POS_1), SIGIL_SIZE, SIGIL_SIZE, null);
+                    g.drawImage(sigils[house], (int) (CELL_SIZE*i - CELL_SIZE*0.25 + TRIPLE_SIGIL_X_POS_2), (int) (CELL_SIZE*j - CELL_SIZE*0.25 + TRIPLE_SIGIL_Y_POS_2), SIGIL_SIZE, SIGIL_SIZE, null);
+                    g.drawImage(sigils[house], (int) (CELL_SIZE*i - CELL_SIZE*0.25 + TRIPLE_SIGIL_X_POS_3), (int) (CELL_SIZE*j - CELL_SIZE*0.25 + TRIPLE_SIGIL_Y_POS_3), SIGIL_SIZE, SIGIL_SIZE, null);
+                }
+            }
+        }
+    }
+
     @Override
     public void mouseClicked (MouseEvent e) {
-        if (insideBoard(e))
-            GameData.grid.addSigil(GameData.grid.getCell(e), GameData.currPlayer);
+        if (firstClick) {
+            firstClick = false;
+            return;
+        }
+        if (insideBoard(e)) {
+            boolean pass = GameData.grid.addSigil(GameData.grid.getCell(e), GameData.players[currPlayer]);
+            if (pass) GameData.nextPlayer();
+        }
     }
 
     @Override

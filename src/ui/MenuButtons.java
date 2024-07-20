@@ -24,7 +24,7 @@ public class MenuButtons {
         this.state = state;
 
         loadImages();
-        initBounds();
+        bounds = new Rectangle(xPos, yPos, MB_WIDTH, MB_HEIGHT);
     }
 
     private void loadImages () {
@@ -34,10 +34,6 @@ public class MenuButtons {
         for (int i=0 ; i<images.length ; i++)
             for (int j=0 ; j<images[i].length ; j++)
                 images[i][j] = tmp.getSubimage(j*MB_WIDTH_DEFAULT, whichButton*MB_HEIGHT_DEFAULT, MB_WIDTH_DEFAULT, MB_HEIGHT_DEFAULT);
-    }
-
-    private void initBounds () {
-        bounds = new Rectangle(xPos, yPos, MB_WIDTH, MB_HEIGHT);
     }
 
     public void update () {
@@ -50,29 +46,31 @@ public class MenuButtons {
         g.drawImage(images[whichButton][mouseState], xPos, yPos, MB_WIDTH, MB_HEIGHT, null);
     }
 
-    // Getters and Setters
-    public boolean isMouseOver () {
-        return mouseOver;
-    }
-    public void setMouseOver (boolean mouseOver) {
-        this.mouseOver = mouseOver;
-    }
-    public boolean isMousePressed () {
-        return mousePressed;
-    }
-    public void setMousePressed (boolean mousePressed) {
-        this.mousePressed = mousePressed;
-    }
-    public Rectangle getBounds () {
-        return bounds;
-    }
-
+    // Operational methods
     public void applyGamestate () {
         GameState.state = state;
     }
 
     public void resetBools () {
-        mouseOver = false;
-        mousePressed = false;
+        mouseOver = mousePressed = false;
+    }
+
+    // Getters
+    public boolean isMouseOver () {
+        return mouseOver;
+    }
+    public boolean isMousePressed () {
+        return mousePressed;
+    }
+    public Rectangle getBounds () {
+        return bounds;
+    }
+
+    // Setters
+    public void setMouseOver (boolean mouseOver) {
+        this.mouseOver = mouseOver;
+    }
+    public void setMousePressed (boolean mousePressed) {
+        this.mousePressed = mousePressed;
     }
 }

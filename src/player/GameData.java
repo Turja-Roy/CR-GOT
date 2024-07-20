@@ -14,6 +14,7 @@ public class GameData {
         grid = new Grid();
     }
 
+    // Initialize players
     public static void initPlayers () {
         players = new Player[numPlayers];
         
@@ -21,6 +22,7 @@ public class GameData {
             players[i] = new Player(i);
     }
 
+    // Initialize houses
     public static void initHouses () {
         houses = new int[numPlayers];
 
@@ -28,6 +30,14 @@ public class GameData {
             houses[i] = players[i].getHouse();
     }
 
+    // Select the next player
+    public static void nextPlayer () {
+        round++;
+        if (currPlayer+1 == numPlayers) currPlayer = 0;
+        else currPlayer++;
+    }
+
+    // Checker method
     public static void printStates () {
         System.out.println("Numplayers: " + numPlayers);
         System.out.println("Round: " + round);
@@ -36,11 +46,5 @@ public class GameData {
             System.out.println(players[i].toString());
         for (int h : houses)
             System.out.println(h);
-    }
-
-    public static void nextPlayer () {
-        round++;
-        if (currPlayer+1 == numPlayers) currPlayer = 0;
-        else currPlayer++;
     }
 }

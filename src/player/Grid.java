@@ -3,13 +3,10 @@ package player;
 import static utilz.Constants.GameConstants.*;
 import static utilz.Constants.UI.GameBoard.*;
 
-import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
 public class Grid {
     private Cell[][] grid = new Cell[10][10];
-
-    public final Rectangle gridBounds = new Rectangle(GB_CENTER_X - GB_WIDTH / 2, GB_CENTER_Y - GB_HEIGHT / 2, GB_WIDTH, GB_HEIGHT);
 
     public Grid () {
         for (int i = 0; i < 10; i++)

@@ -24,7 +24,7 @@ public class NumButtons {
         this.state = state;
 
         loadImages();
-        initBounds();
+        bounds = new Rectangle(xPos, yPos, NPB_WIDTH, NPB_HEIGHT);
     }
 
     private void loadImages () {
@@ -34,10 +34,6 @@ public class NumButtons {
         for (int i=0 ; i<images.length ; i++)
             for (int j=0 ; j<images[i].length ; j++)
                 images[i][j] = tmp.getSubimage(j*NPB_WIDTH_DEFAULT, whichButton*NPB_HEIGHT_DEFAULT, NPB_WIDTH_DEFAULT, NPB_HEIGHT_DEFAULT);
-    }
-
-    private void initBounds () {
-        bounds = new Rectangle(xPos, yPos, NPB_WIDTH, NPB_HEIGHT);
     }
 
     public void update () {
@@ -50,23 +46,24 @@ public class NumButtons {
         g.drawImage(images[whichButton][mouseState], xPos, yPos, NPB_WIDTH, NPB_HEIGHT, null);
     }
 
-    // Getters and Setters
+    // Operational methods
+    public void applyGamestate () {
+        GameState.state = state;
+    }
+    public void resetBools () {
+        mouseOver = mousePressed = false;
+    }
+
+    // Getters
     public boolean isMouseOver () {
         return mouseOver;
-    }
-    public void setMouseOver (boolean mouseOver) {
-        this.mouseOver = mouseOver;
     }
     public boolean isMousePressed () {
         return mousePressed;
     }
-    public void setMousePressed (boolean mousePressed) {
-        this.mousePressed = mousePressed;
-    }
     public Rectangle getBounds () {
         return bounds;
     }
-
     public int getNumPlayers () {
         switch (whichButton) {
             case NPB_2P:
@@ -86,12 +83,11 @@ public class NumButtons {
         }
     }
 
-    public void applyGamestate () {
-        GameState.state = state;
+    // Setters
+    public void setMouseOver (boolean mouseOver) {
+        this.mouseOver = mouseOver;
     }
-
-    public void resetBools () {
-        mouseOver = false;
-        mousePressed = false;
+    public void setMousePressed (boolean mousePressed) {
+        this.mousePressed = mousePressed;
     }
 }

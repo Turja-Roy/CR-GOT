@@ -15,6 +15,7 @@ public class Cell {
         this(rowIndex, colIndex, null, 0);
     }
 
+    // Checker methods
     public boolean isExplodable () {
         // Corners
         if ( (rowIndex == 0 && colIndex == 0) ||
@@ -37,6 +38,8 @@ public class Cell {
     public boolean isOccupiedBy (Player player) {
         return this.player == player;
     }
+
+    // Operational methods
     public void addSigil () {
         sigilCount++;
     }
@@ -49,7 +52,7 @@ public class Cell {
         sigilCount = 0;
     }
 
-    // Getters and Setters
+    // Getters
     public int getRowIndex () {
         return rowIndex;
     }
@@ -59,11 +62,13 @@ public class Cell {
     public Player getPlayer () {
         return player;
     }
-    public void setPlayer (Player player) {
-        this.player = player;
-    }
     public int getSigilCount () {
         return sigilCount;
+    }
+
+    // Setters
+    public void setPlayer (Player player) {
+        this.player = player;
     }
     public void setSigilCount (int sigilCount) {
         this.sigilCount = sigilCount;

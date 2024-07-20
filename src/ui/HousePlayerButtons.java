@@ -72,36 +72,7 @@ public class HousePlayerButtons {
             g.drawImage(houseImages[whichButton-PSB_START-1][mouseState], xPos, yPos, HSB_WIDTH, HSB_HEIGHT, null);
     }
 
-    // Getters and Setters
-    public boolean isMouseOver () {
-        return mouseOver;
-    }
-    public void setMouseOver (boolean mouseOver) {
-        this.mouseOver = mouseOver;
-    }
-    public boolean isMousePressed () {
-        return mousePressed;
-    }
-    public void setMousePressed (boolean mousePressed) {
-        this.mousePressed = mousePressed;
-    }
-    public boolean isMouseClicked () {
-        return mouseClicked;
-    }
-    public void setMouseClicked (boolean mouseClicked) {
-        this.mouseClicked = mouseClicked;
-    }
-    public Rectangle getBounds () {
-        return bounds;
-    }
-    public int getWhichButton () {
-        return whichButton;
-    }
-
-    public void resetBools () {
-        mouseOver = mousePressed = mouseClicked = false;
-    }
-
+    // Operational methods
     public boolean applyGamestate (Game game) {
         boolean pass = true;
 
@@ -119,5 +90,37 @@ public class HousePlayerButtons {
         } 
 
         return pass;
+    }
+
+    public void resetBools () {
+        mouseOver = mousePressed = mouseClicked = false;
+    }
+
+    // Getters
+    public boolean isMouseOver () {
+        return mouseOver;
+    }
+    public boolean isMousePressed () {
+        return mousePressed;
+    }
+    public boolean isMouseClicked () {
+        return mouseClicked;
+    }
+    public Rectangle getBounds () {
+        return bounds;
+    }
+    public int getWhichButton () {
+        return whichButton;
+    }
+
+    // Setters
+    public void setMouseOver (boolean mouseOver) {
+        this.mouseOver = mouseOver;
+    }
+    public void setMousePressed (boolean mousePressed) {
+        this.mousePressed = mousePressed;
+    }
+    public void setMouseClicked (boolean mouseClicked) {
+        this.mouseClicked = mouseClicked;
     }
 }

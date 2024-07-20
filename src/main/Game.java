@@ -102,8 +102,8 @@ public class Game implements Runnable {
 
         long prevTime = System.nanoTime();
 
-        int frames = 0;
-        int updates = 0;
+        // int frames = 0;
+        // int updates = 0;
         long lastCheck = System.currentTimeMillis();
 
         double deltaU = 0;
@@ -117,21 +117,21 @@ public class Game implements Runnable {
 
             if (deltaU >= 1) {
                 update();
-                updates++;
+                // updates++;
                 deltaU--;
             }
 
             if (deltaF >= 1) {
                 gamePanel.repaint();
-                frames++;
+                // frames++;
                 deltaF--;
             }
 
             if (System.currentTimeMillis() - lastCheck >= 1000) {
                 lastCheck = System.currentTimeMillis();
                 // System.out.println("FPS: " + frames + " | UPS: " + updates);
-                frames = 0;
-                updates = 0;
+                // frames = 0;
+                // updates = 0;
             }
         }
     }

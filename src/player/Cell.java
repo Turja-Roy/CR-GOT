@@ -1,21 +1,35 @@
 package player;
 
 public class Cell {
-    private Coor coor;
+    private int rowIndex, colIndex;
     private Player player;
     private int sigilCount;
 
-    Cell (Coor coor, Player player, int sigilCount) {
-        this.coor = coor;
+    Cell (int rowIndex, int colIndex, Player player, int sigilCount) {
+        this.rowIndex = rowIndex;
+        this.colIndex = colIndex;
         this.player = player;
         this.sigilCount = sigilCount;
     }
-    Cell (Coor coor) {
-        this(coor, null, 0);
+    Cell (int rowIndex, int colIndex) {
+        this(rowIndex, colIndex, null, 0);
     }
 
     public boolean isExplodable () {
-        return coor.isExplodable(sigilCount);
+        // Corners
+        if ( (rowIndex == 0 && colIndex == 0) ||
+             (rowIndex == 0 && colIndex == 9) ||
+             (rowIndex == 9 && colIndex == 0) ||
+             (rowIndex == 9 && colIndex == 9) )
+            return sigilCount == 1;
+
+        // Edges
+        else if (rowIndex == 0 || rowIndex == 9 || colIndex == 0 || colIndex == 9)
+            return sigilCount == 2;
+
+        // Center
+        else
+            return sigilCount == 3;
     }
     public boolean isEmpty () {
         return player == null;
@@ -36,6 +50,12 @@ public class Cell {
     }
 
     // Getters and Setters
+    public int getRowIndex () {
+        return rowIndex;
+    }
+    public int getColIndex () {
+        return colIndex;
+    }
     public Player getPlayer () {
         return player;
     }
@@ -47,8 +67,5 @@ public class Cell {
     }
     public void setSigilCount (int sigilCount) {
         this.sigilCount = sigilCount;
-    }
-    public Coor getCoor () {
-        return coor;
     }
 }

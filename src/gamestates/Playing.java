@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 
 import player.GameData;
 import static player.GameData.currPlayer;
-import player.Player;
 import utilz.LoadSave;
 import main.Game;
 import static utilz.Constants.GameConstants.*;

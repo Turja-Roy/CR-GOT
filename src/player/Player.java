@@ -50,8 +50,8 @@ public class Player {
     public void removeSigil () {
         totalSigils--;
     }
-    public void removeSigil (int sigils) {
-        totalSigils -= sigils;
+    public void removeSigil (int count) {
+        totalSigils -= count;
     }
 
     // Setters

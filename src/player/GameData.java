@@ -9,6 +9,7 @@ public class GameData {
     public static Grid grid;
     public static int numPlayers;
     public static int round = 1;
+    public static int winner = -1;
 
     public GameData (Game game) {
         grid = new Grid();
@@ -28,13 +29,6 @@ public class GameData {
 
         for (int i=0 ; i<numPlayers ; i++)
             houses[i] = players[i].getHouse();
-    }
-
-    // Select the next player
-    public static void nextPlayer () {
-        round++;
-        if (currPlayer+1 == numPlayers) currPlayer = 0;
-        else currPlayer++;
     }
 
     // Checker method

@@ -39,6 +39,9 @@ public class Player {
     public Color getColor () {
         return Constants.Colors.getColor(this);
     }
+    public int getID () {
+        return id;
+    }
 
     // Setters
     public void setHouse(int house) {

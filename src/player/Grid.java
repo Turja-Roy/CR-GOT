@@ -15,19 +15,19 @@ public class Grid {
     }
 
     public boolean addSigil (Cell cell, Player player) { // Not exploding
+        // Non-empty cell occupied by other player
         if ( !cell.isEmpty() && !cell.isOccupiedBy(player) )
             return false;
 
+        // Empty or occupied by current player
         player.addSigil();
-        if ( !cell.isExplodable() ) {
-            if ( cell.isEmpty() )
-                cell.addSigil(player);
-            else
-                cell.addSigil();
-        }
-        else {
+        if ( cell.isExplodable() )
             explode(cell, player);
-        }
+        else
+            cell.addSigil(player);
+
+        for (Player p : GameData.players) // For checking
+            System.out.println(p);
 
         return true;
     }
@@ -35,16 +35,24 @@ public class Grid {
     private void addSigil (Cell cell, Player player, boolean isExploding) { // Exploding
         Player prev_player = cell.getPlayer();
 
+        // Empty or occupied by current player
         if (prev_player == null || prev_player == player) {
-            addSigil(cell, player);
+            if ( cell.isExplodable() )
+                explode(cell, player);
+            else
+                cell.addSigil(player);
             return;
         }
 
+        // Occupied by other player
         prev_player.removeSigil( cell.getSigilCount() );
         player.addSigil( cell.getSigilCount() );
-
         cell.setPlayer(player);
-        addSigil(cell, player);
+
+        if ( cell.isExplodable() )
+            explode(cell, player);
+        else
+            cell.setSigilCount( cell.getSigilCount()+1 );
     }
 
     private void explode (Cell cell, Player player) {

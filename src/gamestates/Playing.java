@@ -7,7 +7,11 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import player.GameData;
+import player.Player;
+
 import static player.GameData.currPlayer;
+import static player.GameData.numPlayers;
+
 import utilz.LoadSave;
 import main.Game;
 import static utilz.Constants.GameConstants.*;
@@ -90,8 +94,39 @@ public class Playing extends State implements Statemethods {
         }
         if (insideBoard(e)) {
             boolean pass = GameData.grid.addSigil(GameData.grid.getCell(e), GameData.players[currPlayer]);
-            if (pass) GameData.nextPlayer();
+            if (pass) nextPlayer();
+
+            findWinner();
         }
+    }
+    
+    private void nextPlayer () {
+        if (GameData.round++ <= GameData.numPlayers) {
+            currPlayer = (currPlayer == GameData.numPlayers-1 ? 0 : currPlayer+1);
+            return;
+        }
+
+        currPlayer = (currPlayer == GameData.numPlayers-1 ? 0 : currPlayer+1);
+        while ( GameData.players[currPlayer].getTotalSigils() == 0 )
+            currPlayer = (currPlayer == GameData.numPlayers-1 ? 0 : currPlayer+1);
+    }
+
+    private void findWinner () {
+        if (GameData.round <= numPlayers) return;
+
+        int count=0;
+        for (Player p : GameData.players) {
+            if (p.getTotalSigils() == 0) count++;
+            else GameData.winner = p.getID();
+        }
+
+        if (count == numPlayers-1) {
+            applyGameState(game, GameData.winner);
+        }
+    }
+
+    private void applyGameState (Game game, int winner) {
+        GameState.state = GameState.GAMEOVER;
     }
 
     @Override

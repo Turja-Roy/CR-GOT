@@ -38,7 +38,7 @@ public class Game implements Runnable {
         menu = new Menu(this);
         rules = new Rules(this);
         numPlayer = new NumPlayer(this);
-        playing = new Playing(this);
+        // playing = new Playing(this);
         houseSelection = new HouseSelection(this);
         gameData = new GameData(this);
     }
@@ -156,6 +156,10 @@ public class Game implements Runnable {
     }
     public HouseSelection getHouseSelection () {
         return houseSelection;
+    }
+
+    public void initPlaying () {
+        playing = new Playing(this);
     }
 
     // Give a break

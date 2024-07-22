@@ -28,6 +28,7 @@ public class LoadSave {
     public static final String FLAG_MARTELL = "Martell2.png";
     public static final String FLAG_TULLY = "Tully2.png";
     public static final String FLAG_BOLTON = "Bolton2.png";
+    public static final String FLAGS = "Flags.png";
 
     public static final String MENU_BUTTONS = "menuButtons.png";
     public static final String NUMP_BUTTONS = "numButtons.png";

@@ -86,7 +86,10 @@ public class HousePlayerButtons {
                 if (player.getHouse() == -1)
                     pass = false;
 
-            if (pass) GameState.state = state;
+            if (pass) {
+                game.initPlaying();
+                GameState.state = state;
+            }
         } 
 
         return pass;

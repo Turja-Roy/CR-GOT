@@ -8,21 +8,16 @@ import java.awt.image.BufferedImage;
 
 import player.GameData;
 import player.Player;
-
-import static player.GameData.currPlayer;
-import static player.GameData.numPlayers;
-
+import ui.Flags;
 import utilz.LoadSave;
 import main.Game;
 import static utilz.Constants.GameConstants.*;
-import static utilz.Constants.PlayingConstants.Flags.*;
-import static utilz.Constants.PlayingConstants.Sigils.*;
+import static utilz.Constants.UI.SigilConstants.*;
 
 public class Playing extends State implements Statemethods {
-    private boolean paused = false;
+    private Flags[] flags;
     private BufferedImage mapImage;
     private BufferedImage[] sigils = new BufferedImage[7];
-    private BufferedImage[] flags = new BufferedImage[7];
 
     private static boolean firstClick = true;
 
@@ -30,13 +25,22 @@ public class Playing extends State implements Statemethods {
         super(game);
         mapImage = LoadSave.GetImage(LoadSave.MAP_IMAGE);
 
+        loadFlags();
         sigils = LoadSave.GetSigils();
-        flags = LoadSave.GetFlags();
+    }
+
+    private void loadFlags () {
+        flags = new Flags[GameData.numPlayers];
+
+        int i=0;
+        for (Player p : GameData.players)
+            flags[i++] = new Flags(p.getID(), p.getHouse());
     }
 
     @Override
     public void update () {
-
+        for (Flags flag : flags)
+            flag.update();
     }
 
     @Override
@@ -47,12 +51,12 @@ public class Playing extends State implements Statemethods {
         drawSigils(g);
         g.drawImage(mapImage, CELL_SIZE*10, 0, CELL_SIZE*8+2, CELL_SIZE*10, null);
 
-        for (int house : GameData.houses)
-            g.drawImage(flags[house], FLAG_X_POS[house], FLAG_Y_POS[house], FLAG_WIDTH, FLAG_HEIGHT, null);
+        for (Flags flag : flags)
+            flag.draw(g);
     }
 
     private void drawGrid (Graphics2D g) {
-        g.setColor(GameData.players[currPlayer].getColor());
+        g.setColor(GameData.players[GameData.currPlayer].getColor());
         g.fillRect(0, 0, CELL_SIZE*10+2, CELL_SIZE*10+2);
         g.setColor(Color.BLACK);
 
@@ -93,7 +97,7 @@ public class Playing extends State implements Statemethods {
             return;
         }
         if (insideBoard(e)) {
-            boolean pass = GameData.grid.addSigil(GameData.grid.getCell(e), GameData.players[currPlayer]);
+            boolean pass = GameData.grid.addSigil(GameData.grid.getCell(e), GameData.players[GameData.currPlayer]);
             if (pass) nextPlayer();
 
             findWinner();
@@ -102,17 +106,17 @@ public class Playing extends State implements Statemethods {
     
     private void nextPlayer () {
         if (GameData.round++ <= GameData.numPlayers) {
-            currPlayer = (currPlayer == GameData.numPlayers-1 ? 0 : currPlayer+1);
+            GameData.currPlayer = (GameData.currPlayer == GameData.numPlayers-1 ? 0 : GameData.currPlayer+1);
             return;
         }
 
-        currPlayer = (currPlayer == GameData.numPlayers-1 ? 0 : currPlayer+1);
-        while ( GameData.players[currPlayer].getTotalSigils() == 0 )
-            currPlayer = (currPlayer == GameData.numPlayers-1 ? 0 : currPlayer+1);
+        GameData.currPlayer = (GameData.currPlayer == GameData.numPlayers-1 ? 0 : GameData.currPlayer+1);
+        while ( GameData.players[GameData.currPlayer].getTotalSigils() == 0 )
+            GameData.currPlayer = (GameData.currPlayer == GameData.numPlayers-1 ? 0 : GameData.currPlayer+1);
     }
 
     private void findWinner () {
-        if (GameData.round <= numPlayers) return;
+        if (GameData.round <= GameData.numPlayers) return;
 
         int count=0;
         for (Player p : GameData.players) {
@@ -120,7 +124,7 @@ public class Playing extends State implements Statemethods {
             else GameData.winner = p.getID();
         }
 
-        if (count == numPlayers-1) {
+        if (count == GameData.numPlayers-1) {
             applyGameState(game, GameData.winner);
         }
     }

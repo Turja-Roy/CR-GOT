@@ -4,21 +4,18 @@ import static utilz.Constants.GameConstants.*;
 import static utilz.Constants.UI.NumPlayerButtons.NPB_BACK;
 import static utilz.Constants.RulesConstants.*;
 
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-import main.Game;
 import ui.NumButtons;
 import utilz.LoadSave;
 
-public class Rules extends State implements Statemethods {
+public class Rules implements Statemethods {
     private NumButtons backButton;
     private BufferedImage bgImage, scrollImage;
 
-    public Rules (Game game) {
-        super(game);
+    public Rules () {
         backButton = new NumButtons(GAME_WIDTH/2 - CELL_SIZE, GAME_HEIGHT*7/8, NPB_BACK, GameState.MENU);
         bgImage = LoadSave.GetImage(LoadSave.INTRO_PAGE);
         scrollImage = LoadSave.GetImage(LoadSave.SCROLL);
@@ -57,4 +54,10 @@ public class Rules extends State implements Statemethods {
     public void mouseMoved(MouseEvent e) {
         backButton.setMouseOver(isInside(e, backButton));
     }
+
+    private boolean isInside (MouseEvent e, NumButtons button) {
+        return button.getBounds().contains(e.getX(), e.getY());
+    }
+
 }
+

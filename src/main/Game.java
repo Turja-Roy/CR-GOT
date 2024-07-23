@@ -23,6 +23,8 @@ public class Game implements Runnable {
     private Playing playing;
     private HouseSelection houseSelection;
     public GameData gameData;
+
+    private Graphics g;
     
     public Game () {
         initClasses();
@@ -35,9 +37,9 @@ public class Game implements Runnable {
     }
 
     private void initClasses() {
-        menu = new Menu(this);
-        rules = new Rules(this);
-        numPlayer = new NumPlayer(this);
+        menu = new Menu();
+        rules = new Rules();
+        numPlayer = new NumPlayer();
         // playing = new Playing(this);
         houseSelection = new HouseSelection(this);
         gameData = new GameData(this);
@@ -73,6 +75,7 @@ public class Game implements Runnable {
     }
 
     public void render (Graphics g) {
+        this.g = g;
         switch (GameState.state) {
             case MENU:
                 menu.draw(g);
@@ -156,6 +159,9 @@ public class Game implements Runnable {
     }
     public HouseSelection getHouseSelection () {
         return houseSelection;
+    }
+    public Graphics getGraphics () {
+        return g;
     }
 
     public void initPlaying () {

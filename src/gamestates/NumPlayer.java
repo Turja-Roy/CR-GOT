@@ -7,17 +7,15 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-import main.Game;
 import player.GameData;
 import ui.NumButtons;
 import utilz.LoadSave;
 
-public class NumPlayer extends State implements Statemethods {
+public class NumPlayer implements Statemethods {
     private NumButtons[] buttons = new NumButtons[8];
     private BufferedImage bgImage;
 
-    public NumPlayer (Game game) {
-        super(game);
+    public NumPlayer () {
         loadButtons();
         bgImage = LoadSave.GetImage(LoadSave.INTRO_PAGE);
     }
@@ -80,4 +78,9 @@ public class NumPlayer extends State implements Statemethods {
         for (NumButtons button : buttons)
             button.setMouseOver(isInside(e, button));
     }
+
+    private boolean isInside (MouseEvent e, NumButtons button) {
+        return button.getBounds().contains(e.getX(), e.getY());
+    }
+
 }

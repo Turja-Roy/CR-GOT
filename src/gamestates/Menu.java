@@ -4,18 +4,16 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-import main.Game;
 import ui.MenuButtons;
 import utilz.LoadSave;
 
 import static utilz.Constants.GameConstants.*;
 
-public class Menu extends State implements Statemethods {
+public class Menu implements Statemethods {
     private MenuButtons[] buttons = new MenuButtons[3];
     private BufferedImage bgImage;
     
-    public Menu (Game game) {
-        super(game);
+    public Menu () {
         loadButtons();
         bgImage = LoadSave.GetImage(LoadSave.INTRO_PAGE);
     }
@@ -72,4 +70,7 @@ public class Menu extends State implements Statemethods {
             button.setMouseOver(isInside(e, button));
     }
 
+    private boolean isInside (MouseEvent e, MenuButtons button) {
+        return button.getBounds().contains(e.getX(), e.getY());
+    }
 }

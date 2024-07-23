@@ -3,15 +3,21 @@ package player;
 import static utilz.Constants.GameConstants.*;
 import static utilz.Constants.UI.GameBoard.*;
 
+import java.awt.Graphics;
 import java.awt.event.MouseEvent;
+
+import main.Game;
+import ui.Sigils;
 
 public class Grid {
     private Cell[][] grid = new Cell[10][10];
+    private Game game;
 
-    public Grid () {
+    public Grid (Game game) {
+        this.game = game;
         for (int i = 0; i < 10; i++)
             for (int j = 0; j < 10; j++)
-                grid[i][j] = new Cell(i, j);
+                grid[i][j] = new Cell(i,j);
     }
 
     public boolean addSigil (Cell cell, Player player) { // Not exploding
@@ -77,12 +83,12 @@ public class Grid {
         int x = e.getX();
         int y = e.getY();
 
-        if (x < GB_CENTER_X - GB_WIDTH / 2 || x > GB_CENTER_X + GB_WIDTH / 2 ||
-            y < GB_CENTER_Y - GB_HEIGHT / 2 || y > GB_CENTER_Y + GB_HEIGHT / 2)
+        if (x < 0 || x > GB_WIDTH ||
+            y < 0 || y > GB_HEIGHT )
             return null;
 
-        int rowIndex = (y - GB_CENTER_Y + GB_HEIGHT / 2) / CELL_SIZE;
-        int colIndex = (x - GB_CENTER_X + GB_WIDTH / 2) / CELL_SIZE;
+        int colIndex = x / CELL_SIZE;
+        int rowIndex = y / CELL_SIZE;
 
         return grid[rowIndex][colIndex];
     }

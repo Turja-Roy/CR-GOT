@@ -1,19 +1,22 @@
 package ui;
 
 import static utilz.Constants.GameConstants.CELL_SIZE;
+import static utilz.Constants.GameConstants.SCALE;
 import static utilz.Constants.UI.SigilConstants.*;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import main.Game;
+import player.Explodables;
+import player.GameData;
 import utilz.LoadSave;
 
 public class Sigils {
-    private int whichPlayer, whichSigil;
+    private int whichSigil;
     private BufferedImage[] images;
 
-    public Sigils (int whichPlayer, int whichSigil) {
-        this.whichPlayer = whichPlayer;
+    public Sigils (int whichSigil) {
         this.whichSigil = whichSigil;
 
         loadImages();
@@ -37,6 +40,45 @@ public class Sigils {
                     (int) (CELL_SIZE*j + SIGIL_Y_POS),
                     SIGIL_SIZE, SIGIL_SIZE, null
         );
+    }
+
+    public void animateExplodable (Graphics g, Explodables ex, Game game) {
+        int j=ex.rowIndex, i=ex.colIndex;
+        float scale = 0.04f;
+        int initial_i = CELL_SIZE*i + SIGIL_X_POS;
+        int initial_j = CELL_SIZE*j + SIGIL_Y_POS;
+        float i_pos_plus = (float) initial_i;
+        float j_pos_plus = (float) initial_j;
+        float i_pos_minus = (float) initial_i;
+        float j_pos_minus = (float) initial_j;
+
+        while (i_pos_plus <= initial_i+CELL_SIZE) {
+            g.drawImage( images[0],
+                        (int) (i_pos_plus),
+                        (int) (initial_j),
+                        SIGIL_SIZE, SIGIL_SIZE, null
+            );
+            g.drawImage( images[0],
+                        (int) (i_pos_minus),
+                        (int) (initial_j),
+                        SIGIL_SIZE, SIGIL_SIZE, null
+            );
+            g.drawImage( images[0],
+                        (int) (initial_i),
+                        (int) (j_pos_plus),
+                        SIGIL_SIZE, SIGIL_SIZE, null
+            );
+            g.drawImage( images[0],
+                        (int) (initial_i),
+                        (int) (j_pos_minus),
+                        SIGIL_SIZE, SIGIL_SIZE, null
+            );
+
+            i_pos_plus += scale*SCALE;
+            j_pos_plus += scale*SCALE;
+            i_pos_minus -= scale*SCALE;
+            j_pos_minus -= scale*SCALE;
+        }
     }
 
 }

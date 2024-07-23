@@ -14,7 +14,8 @@ import player.GameData;
 import ui.HousePlayerButtons;
 import utilz.LoadSave;
 
-public class HouseSelection extends State implements Statemethods {
+public class HouseSelection implements Statemethods {
+    private Game game;
     private HousePlayerButtons[] playerButtons = new HousePlayerButtons[10];
     private HousePlayerButtons[] houseButtons = new HousePlayerButtons[10];
     private BufferedImage bgImage;
@@ -24,7 +25,7 @@ public class HouseSelection extends State implements Statemethods {
     private static boolean firstClick = true;
     
     public HouseSelection (Game game) {
-        super(game);
+        this.game = game;
         loadPlayerButtons();
         loadHouseButtons();
         bgImage = LoadSave.GetImage(LoadSave.INTRO_PAGE);
@@ -184,4 +185,9 @@ public class HouseSelection extends State implements Statemethods {
         for (HousePlayerButtons button : houseButtons)
             button.setMouseOver(isInside(e, button));
     }
+
+    private boolean isInside (MouseEvent e, HousePlayerButtons button) {
+        return button.getBounds().contains(e.getX(), e.getY());
+    }
+
 }

@@ -1,5 +1,7 @@
 package player;
 
+import java.util.ArrayList;
+
 import main.Game;
 
 public class GameData {
@@ -11,8 +13,10 @@ public class GameData {
     public static int round = 1;
     public static int winner = -1;
 
+    public static ArrayList<Explodables> explodables = new ArrayList<Explodables>();
+
     public GameData (Game game) {
-        grid = new Grid();
+        grid = new Grid(game);
     }
 
     // Initialize players

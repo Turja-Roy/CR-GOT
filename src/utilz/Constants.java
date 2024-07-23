@@ -167,8 +167,6 @@ public class Constants {
         }
 
         public static class GameBoard {
-            public static final int GB_CENTER_X = CELL_SIZE * 5;
-            public static final int GB_CENTER_Y = CELL_SIZE * 5;
             public static final int GB_WIDTH = CELL_SIZE * 10;
             public static final int GB_HEIGHT = CELL_SIZE * 10;
         }

@@ -16,7 +16,7 @@ import static utilz.Constants.UI.MouseStates.*;
 public class HousePlayerButtons {
     private int xPos, yPos, whichButton, mouseState;
     private GameState state;
-    private BufferedImage[][] playerImages, houseImages;
+    private BufferedImage[] playerImages, houseImages;
     private boolean mouseOver, mousePressed, mouseClicked;
     private Rectangle bounds;
 
@@ -34,21 +34,19 @@ public class HousePlayerButtons {
     }
 
     private void loadPlayerButtonImages () {
-        playerImages = new BufferedImage[10][3];
+        playerImages = new BufferedImage[3];
         BufferedImage tmp = LoadSave.GetImage(LoadSave.PLAYER_SELECTION_BUTTONS);
 
-        for (int i=0 ; i<playerImages.length ; i++)
-            for (int j=0 ; j<playerImages[i].length ; j++)
-                playerImages[i][j] = tmp.getSubimage(j*PSB_WIDTH_DEFAULT, whichButton*PSB_HEIGHT_DEFAULT, PSB_WIDTH_DEFAULT, PSB_HEIGHT_DEFAULT);
+        for (int i=0 ; i<3 ; i++)
+            playerImages[i] = tmp.getSubimage(i*PSB_WIDTH_DEFAULT, whichButton*PSB_HEIGHT_DEFAULT, PSB_WIDTH_DEFAULT, PSB_HEIGHT_DEFAULT);
     }
 
     private void loadHouseButtonImages () {
-        houseImages = new BufferedImage[10][3];
+        houseImages = new BufferedImage[3];
         BufferedImage tmp = LoadSave.GetImage(LoadSave.HOUSE_SELECTION_BUTTONS);
 
-        for (int i=0 ; i<houseImages.length ; i++)
-            for (int j=0 ; j<houseImages[i].length ; j++)
-                houseImages[i][j] = tmp.getSubimage(j*HSB_WIDTH_DEFAULT, (whichButton-PSB_START-1)*HSB_HEIGHT_DEFAULT, HSB_WIDTH_DEFAULT, HSB_HEIGHT_DEFAULT);
+        for (int i=0 ; i<3 ; i++)
+            houseImages[i] = tmp.getSubimage(i*HSB_WIDTH_DEFAULT, (whichButton-PSB_START-1)*HSB_HEIGHT_DEFAULT, HSB_WIDTH_DEFAULT, HSB_HEIGHT_DEFAULT);
     }
 
     private void initBounds (int whichButton) {
@@ -67,9 +65,9 @@ public class HousePlayerButtons {
 
     public void draw (Graphics g) {
         if (whichButton <= PSB_START)
-            g.drawImage(playerImages[whichButton][mouseState], xPos, yPos, PSB_WIDTH, PSB_HEIGHT, null);
+            g.drawImage(playerImages[mouseState], xPos, yPos, PSB_WIDTH, PSB_HEIGHT, null);
         else
-            g.drawImage(houseImages[whichButton-PSB_START-1][mouseState], xPos, yPos, HSB_WIDTH, HSB_HEIGHT, null);
+            g.drawImage(houseImages[mouseState], xPos, yPos, HSB_WIDTH, HSB_HEIGHT, null);
     }
 
     // Operational methods

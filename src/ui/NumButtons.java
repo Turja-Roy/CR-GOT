@@ -13,7 +13,7 @@ import static utilz.Constants.UI.MouseStates.*;
 public class NumButtons {
     private int xPos, yPos, whichButton, mouseState;
     private GameState state;
-    private BufferedImage[][] images;
+    private BufferedImage[] images;
     private boolean mouseOver, mousePressed;
     private Rectangle bounds;
 
@@ -28,12 +28,11 @@ public class NumButtons {
     }
 
     private void loadImages () {
-        images = new BufferedImage[8][3];
+        images = new BufferedImage[3];
         BufferedImage tmp = LoadSave.GetImage(LoadSave.NUMP_BUTTONS);
 
-        for (int i=0 ; i<images.length ; i++)
-            for (int j=0 ; j<images[i].length ; j++)
-                images[i][j] = tmp.getSubimage(j*NPB_WIDTH_DEFAULT, whichButton*NPB_HEIGHT_DEFAULT, NPB_WIDTH_DEFAULT, NPB_HEIGHT_DEFAULT);
+        for (int i=0 ; i<3 ; i++)
+            images[i] = tmp.getSubimage(i*NPB_WIDTH_DEFAULT, whichButton*NPB_HEIGHT_DEFAULT, NPB_WIDTH_DEFAULT, NPB_HEIGHT_DEFAULT);
     }
 
     public void update () {
@@ -43,7 +42,7 @@ public class NumButtons {
     }
 
     public void draw (Graphics g) {
-        g.drawImage(images[whichButton][mouseState], xPos, yPos, NPB_WIDTH, NPB_HEIGHT, null);
+        g.drawImage(images[mouseState], xPos, yPos, NPB_WIDTH, NPB_HEIGHT, null);
     }
 
     // Operational methods

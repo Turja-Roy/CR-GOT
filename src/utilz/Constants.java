@@ -3,7 +3,6 @@ package utilz;
 import static utilz.Constants.GameConstants.*;
 
 import java.awt.Color;
-import java.awt.Graphics;
 
 import player.Player;
 
@@ -81,47 +80,6 @@ public class Constants {
                     return COLOR_BOLTON;
                 default:
                     return COLOR_BLACK;
-            }
-        }
-    }
-
-    // Sigil constants
-    public static class Sigils {
-        public static final String SIGIL_TARGARYEN = "/images/Targaryen.png";
-        public static final String SIGIL_STARK = "/images/Stark.png";
-        public static final String SIGIL_LANNISTER = "/images/Lannister.png";
-        public static final String SIGIL_BARATHEON = "/images/Baratheon.png";
-        public static final String SIGIL_TYRELL = "/images/Tyrell.png";
-        public static final String SIGIL_ARRYN = "/images/Arryn.png";
-        public static final String SIGIL_GREYJOY = "/images/Greyjoy.png";
-        public static final String SIGIL_MARTELL = "/images/Martell.png";
-        public static final String SIGIL_TULLY = "/images/Tully.png";
-        public static final String SIGIL_BOLTON = "/images/Bolton.png";
-
-        public static String getSigil (Player player) {
-            switch (player.getHouse()) {
-                case House.TARGARYEN:
-                    return SIGIL_TARGARYEN;
-                case House.STARK:
-                    return SIGIL_STARK;
-                case House.LANNISTER:
-                    return SIGIL_LANNISTER;
-                case House.BARATHEON:
-                    return SIGIL_BARATHEON;
-                case House.TYRELL:
-                    return SIGIL_TYRELL;
-                case House.ARRYN:
-                    return SIGIL_ARRYN;
-                case House.GREYJOY:
-                    return SIGIL_GREYJOY;
-                case House.MARTELL:
-                    return SIGIL_MARTELL;
-                case House.TULLY:
-                    return SIGIL_TULLY;
-                case House.BOLTON:
-                    return SIGIL_BOLTON;
-                default:
-                    return null;
             }
         }
     }
@@ -251,22 +209,10 @@ public class Constants {
             public static final int SIGIL_WIDTH_DEFAULT = 250;
             public static final int SIGIL_HEIGHT_DEFAULT = 250;
 
-            public static final int SIGIL_SIZE = (int) (CELL_SIZE*0.5);
+            public static final int SIGIL_SIZE = (int) (CELL_SIZE * 0.6);
 
-            public static final int SINGLE_SIGIL_X_POS = (int) (CELL_SIZE * 0.5);
-            public static final int SINGLE_SIGIL_Y_POS = (int) (CELL_SIZE * 0.5);
-
-            public static final int DOUBLE_SIGIL_X_POS_1 = (int) (CELL_SIZE * 0.3);
-            public static final int DOUBLE_SIGIL_Y_POS_1 = (int) (CELL_SIZE * 0.7);
-            public static final int DOUBLE_SIGIL_X_POS_2 = (int) (CELL_SIZE * 0.5);
-            public static final int DOUBLE_SIGIL_Y_POS_2 = (int) (CELL_SIZE * 0.5);
-
-            public static final int TRIPLE_SIGIL_X_POS_1 = (int) (CELL_SIZE * 0.3);
-            public static final int TRIPLE_SIGIL_Y_POS_1 = (int) (CELL_SIZE * 0.3);
-            public static final int TRIPLE_SIGIL_X_POS_2 = (int) (CELL_SIZE * 0.5);
-            public static final int TRIPLE_SIGIL_Y_POS_2 = (int) (CELL_SIZE * 0.6);
-            public static final int TRIPLE_SIGIL_X_POS_3 = (int) (CELL_SIZE * 0.7);
-            public static final int TRIPLE_SIGIL_Y_POS_3 = (int) (CELL_SIZE * 0.3);
+            public static final int SIGIL_X_POS = (int) (CELL_SIZE * 0.2);
+            public static final int SIGIL_Y_POS = (int) (CELL_SIZE * 0.2);
         }
     }
 }

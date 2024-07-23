@@ -13,7 +13,7 @@ import static utilz.Constants.UI.MouseStates.*;
 public class MenuButtons {
     private int xPos, yPos, whichButton, mouseState;
     private GameState state;
-    private BufferedImage[][] images;
+    private BufferedImage[] images;
     private boolean mouseOver, mousePressed;
     private Rectangle bounds;
 
@@ -28,12 +28,11 @@ public class MenuButtons {
     }
 
     private void loadImages () {
-        images = new BufferedImage[3][3];
+        images = new BufferedImage[3];
         BufferedImage tmp = LoadSave.GetImage(LoadSave.MENU_BUTTONS);
 
-        for (int i=0 ; i<images.length ; i++)
-            for (int j=0 ; j<images[i].length ; j++)
-                images[i][j] = tmp.getSubimage(j*MB_WIDTH_DEFAULT, whichButton*MB_HEIGHT_DEFAULT, MB_WIDTH_DEFAULT, MB_HEIGHT_DEFAULT);
+        for (int i=0 ; i<3 ; i++)
+            images[i] = tmp.getSubimage(i*MB_WIDTH_DEFAULT, whichButton*MB_HEIGHT_DEFAULT, MB_WIDTH_DEFAULT, MB_HEIGHT_DEFAULT);
     }
 
     public void update () {
@@ -43,7 +42,7 @@ public class MenuButtons {
     }
 
     public void draw (Graphics g) {
-        g.drawImage(images[whichButton][mouseState], xPos, yPos, MB_WIDTH, MB_HEIGHT, null);
+        g.drawImage(images[mouseState], xPos, yPos, MB_WIDTH, MB_HEIGHT, null);
     }
 
     // Operational methods

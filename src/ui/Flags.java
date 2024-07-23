@@ -41,7 +41,10 @@ public class Flags {
     }
 
     public void draw (Graphics g) {
-        g.drawImage( images[ dead ? 2 : move ? 1 : 0 ], xPos, yPos, FLAG_WIDTH, FLAG_HEIGHT, null );
+        g.drawImage( images[ dead ? 2 : move ? 1 : 0 ],
+                        xPos, yPos,
+                        FLAG_WIDTH, FLAG_HEIGHT, null
+        );
     }
 
     public void applyGamestate () {

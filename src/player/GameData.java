@@ -2,8 +2,6 @@ package player;
 
 import java.util.ArrayList;
 
-import main.Game;
-
 public class GameData {
     public static Player[] players;
     public static int[] houses;
@@ -14,10 +12,6 @@ public class GameData {
     public static int winner = -1;
 
     public static ArrayList<Explodables> explodables = new ArrayList<Explodables>();
-
-    public GameData (Game game) {
-        grid = new Grid(game);
-    }
 
     // Initialize players
     public static void initPlayers () {

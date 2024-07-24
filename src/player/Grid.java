@@ -3,21 +3,18 @@ package player;
 import static utilz.Constants.GameConstants.*;
 import static utilz.Constants.UI.GameBoard.*;
 
-import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
-import main.Game;
-import ui.Sigils;
-
 public class Grid {
-    private Cell[][] grid = new Cell[10][10];
-    private Game game;
+    protected boolean drawCells = true;
 
-    public Grid (Game game) {
-        this.game = game;
+    private Cell[][] grid = new Cell[10][10];
+
+    public Grid () {
         for (int i = 0; i < 10; i++)
             for (int j = 0; j < 10; j++)
                 grid[i][j] = new Cell(i,j);
+        GameData.grid = this;
     }
 
     public boolean addSigil (Cell cell, Player player) { // Not exploding

@@ -8,7 +8,6 @@ import gamestates.Menu;
 import gamestates.NumPlayer;
 import gamestates.Playing;
 import gamestates.Rules;
-import player.GameData;
 
 public class Game implements Runnable {
     private GameWindow gameWindow;
@@ -22,7 +21,6 @@ public class Game implements Runnable {
     private NumPlayer numPlayer;
     private Playing playing;
     private HouseSelection houseSelection;
-    public GameData gameData;
 
     private Graphics g;
     
@@ -42,7 +40,6 @@ public class Game implements Runnable {
         numPlayer = new NumPlayer();
         // playing = new Playing(this);
         houseSelection = new HouseSelection(this);
-        gameData = new GameData(this);
     }
 
     private void startGame() {

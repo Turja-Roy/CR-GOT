@@ -44,7 +44,7 @@ public class Sigils {
 
     public void animateExplodable (Graphics g, Explodables ex, Game game) {
         int j=ex.rowIndex, i=ex.colIndex;
-        float scale = 0.04f;
+        int scale = 10;
         int initial_i = CELL_SIZE*i + SIGIL_X_POS;
         int initial_j = CELL_SIZE*j + SIGIL_Y_POS;
         float i_pos_plus = (float) initial_i;

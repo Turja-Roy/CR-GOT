@@ -6,15 +6,12 @@ import static utilz.Constants.UI.GameBoard.*;
 import java.awt.event.MouseEvent;
 
 public class Grid {
-    protected boolean drawCells = true;
-
-    private Cell[][] grid = new Cell[10][10];
+    protected Cell[][] grid = new Cell[10][10];
 
     public Grid () {
         for (int i = 0; i < 10; i++)
             for (int j = 0; j < 10; j++)
                 grid[i][j] = new Cell(i,j);
-        GameData.grid = this;
     }
 
     public boolean addSigil (Cell cell, Player player) { // Not exploding

@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 
 import gamestates.GameState;
 import player.GameData;
-import player.Player;
 import utilz.LoadSave;
 
 import static utilz.Constants.UI.FlagConstants.*;

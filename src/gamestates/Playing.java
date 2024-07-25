@@ -22,7 +22,7 @@ public class Playing extends Grid implements Statemethods {
     private Sigils[] sigils;
 
     private BufferedImage mapImage;
-    private long animTick=0;
+    private int animTick=0, animInd=0, animDone=0;
 
     private boolean firstClick = true;
 
@@ -59,27 +59,47 @@ public class Playing extends Grid implements Statemethods {
 
     @Override
     public void draw (Graphics g) {
-        if (drawCells) drawGrid(g);
-        g.drawImage(mapImage, CELL_SIZE*10, 0, CELL_SIZE*8+2, CELL_SIZE*10, null);
+        if ( !GameData.explodables.isEmpty() ) {
+            animTick++;
 
+            drawGrid(g);
+            
+            Explodables ex = GameData.explodables.getFirst();
+            sigils[ex.player].animateExplodable(g, ex, game);
+
+            if (animInd == GameData.explodables.size()) {
+                animTick = animInd = animDone = 0;
+                GameData.explodables.clear();
+            }
+
+            g.drawImage(mapImage, CELL_SIZE*10, 0, CELL_SIZE*8+2, CELL_SIZE*10, null);
+            for (Flags flag : flags)
+            flag.draw(g);
+
+            drawSigils(g);
+
+            if (animTick <= 48) return;
+            else {
+                animInd++;
+                GameData.explodables.removeFirst();
+            }
+
+            // for (Explodables ex : GameData.explodables) {
+            //     if (animInd++ == animDone) {
+            //         sigils[ex.player].animateExplodable(g, ex, game);
+            //         if (animTick <= 24) return;
+            //     }
+            //     if (animTick >= 24) animDone++;
+            // }
+        }
+
+        drawGrid(g);
+
+        g.drawImage(mapImage, CELL_SIZE*10, 0, CELL_SIZE*8+2, CELL_SIZE*10, null);
         for (Flags flag : flags)
             flag.draw(g);
 
-        if (GameData.explodables != null) {
-            animTick++;
-            for (Explodables ex : GameData.explodables) {
-                sigils[ex.player].animateExplodable(g, ex, game);
-                if (animTick <= 24) return;
-            }
-        }
-
-        animTick = 0;
-        GameData.explodables.clear();
-
-        if (drawCells) {
-            drawSigils(g);
-            drawCells = false;
-        }
+        drawSigils(g);
     }
 
     private void drawGrid (Graphics g) {
@@ -97,9 +117,9 @@ public class Playing extends Grid implements Statemethods {
     private void drawSigils (Graphics g) {
         for (int i=0 ; i<10 ; i++) {
             for (int j=0 ; j<10 ; j++) {
-                Player whichPlayer = GameData.grid.getCell(i,j).getPlayer();
+                Player whichPlayer = getCell(i,j).getPlayer();
                 if (whichPlayer == null) continue;
-                sigils[whichPlayer.getID()].draw(g, GameData.grid.getCell(i,j).getSigilCount(), j, i);
+                sigils[whichPlayer.getID()].draw(g, getCell(i,j).getSigilCount(), i, j);
             }
         }
     }
@@ -112,7 +132,7 @@ public class Playing extends Grid implements Statemethods {
         }
         if (insideBoard(e)) {
             animTick = 0;
-            boolean pass = GameData.grid.addSigil(GameData.grid.getCell(e), GameData.players[GameData.currPlayer]);
+            boolean pass = addSigil(getCell(e), GameData.players[GameData.currPlayer]);
             if (pass) nextPlayer();
 
             findWinner();

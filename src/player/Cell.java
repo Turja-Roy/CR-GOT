@@ -25,7 +25,7 @@ public class Cell {
              (rowIndex == 9 && colIndex == 9) ) {
             if (sigilCount == 1) {
                 GameData.explodables.add(new Explodables(player.getID(), rowIndex, colIndex));
-                System.out.println("Explodable at row=" + rowIndex + ", col=" + colIndex);
+                // System.out.println("Explodable at row=" + rowIndex + ", col=" + colIndex);
             }
             return sigilCount == 1;
         }
@@ -35,7 +35,7 @@ public class Cell {
         else if (rowIndex == 0 || rowIndex == 9 || colIndex == 0 || colIndex == 9) {
             if (sigilCount == 2) {
                 GameData.explodables.add(new Explodables(player.getID(), rowIndex, colIndex));
-                System.out.println("Explodable at row=" + rowIndex + ", col=" + colIndex);
+                // System.out.println("Explodable at row=" + rowIndex + ", col=" + colIndex);
             }
             return sigilCount == 2;
         }
@@ -44,7 +44,7 @@ public class Cell {
         else {
             if (sigilCount == 3) {
                 GameData.explodables.add(new Explodables(player.getID(), rowIndex, colIndex));
-                System.out.println("Explodable at row=" + rowIndex + ", col=" + colIndex);
+                // System.out.println("Explodable at row=" + rowIndex + ", col=" + colIndex);
             }
             return sigilCount == 3;
         }

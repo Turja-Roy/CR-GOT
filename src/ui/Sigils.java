@@ -34,10 +34,10 @@ public class Sigils {
 
     }
 
-    public void draw (Graphics g, int count, int i, int j) {
+    public void draw (Graphics g, int count, int row, int col) {
         g.drawImage( images[--count],
-                    (int) (CELL_SIZE*i + SIGIL_X_POS),
-                    (int) (CELL_SIZE*j + SIGIL_Y_POS),
+                    (int) (CELL_SIZE*col + SIGIL_X_POS),
+                    (int) (CELL_SIZE*row + SIGIL_Y_POS),
                     SIGIL_SIZE, SIGIL_SIZE, null
         );
     }

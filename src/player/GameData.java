@@ -6,7 +6,6 @@ public class GameData {
     public static Player[] players;
     public static int[] houses;
     public static int currPlayer = 0;
-    public static Grid grid;
     public static int numPlayers;
     public static int round = 1;
     public static int winner = -1;

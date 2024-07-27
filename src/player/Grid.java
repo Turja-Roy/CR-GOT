@@ -4,6 +4,7 @@ import static utilz.Constants.GameConstants.*;
 import static utilz.Constants.UI.GameBoard.*;
 
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class Grid {
     protected Cell[][] grid = new Cell[10][10];
@@ -12,6 +13,11 @@ public class Grid {
         for (int i = 0; i < 10; i++)
             for (int j = 0; j < 10; j++)
                 grid[i][j] = new Cell(i,j);
+
+        GameData.winner = -1;
+        GameData.rotation = 0;
+        GameData.countExplodables = 0;
+        GameData.explodables = new ArrayList<Explodables>();
     }
 
     public boolean addSigil (Cell cell, Player player) { // Not exploding
@@ -56,6 +62,7 @@ public class Grid {
     }
 
     private void explode (Cell cell, Player player) {
+        GameData.countExplodables--;
         cell.emptyCell();
         int rowIndex=cell.getRowIndex(), colIndex=cell.getColIndex();
 
@@ -67,6 +74,15 @@ public class Grid {
             addSigil(grid[rowIndex][colIndex - 1], player, true);
         if ( colIndex < 9 )
             addSigil(grid[rowIndex][colIndex + 1], player, true);
+    }
+
+    protected boolean isAnyExplodable () {
+        for (int i=0 ; i<10 ; i++)
+            for (int j=0 ; j<10 ; j++)
+                if ( grid[i][j].isExplodable(true) )
+                    return true;
+
+        return false;
     }
 
     // Getters

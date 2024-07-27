@@ -49,6 +49,30 @@ public class Cell {
             return sigilCount == 3;
         }
     }
+    public boolean isExplodable (boolean checkOnly) {
+        // System.out.println("Here! row: " + rowIndex + " | col: " + colIndex);
+        // Corners
+        if ( (rowIndex == 0 && colIndex == 0) ||
+             (rowIndex == 0 && colIndex == 9) ||
+             (rowIndex == 9 && colIndex == 0) ||
+             (rowIndex == 9 && colIndex == 9) ) {
+            if (sigilCount == 1) GameData.countExplodables++;
+            return sigilCount == 1;
+        }
+
+
+        // Edges
+        else if (rowIndex == 0 || rowIndex == 9 || colIndex == 0 || colIndex == 9) {
+            if (sigilCount == 2) GameData.countExplodables++;
+            return sigilCount == 2;
+        }
+
+        // Center
+        else {
+            if (sigilCount == 3) GameData.countExplodables++;
+            return sigilCount == 3;
+        }
+    }
     public boolean isEmpty () {
         return player == null;
     }

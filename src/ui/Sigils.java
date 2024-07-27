@@ -5,11 +5,13 @@ import static utilz.Constants.GameConstants.SCALE;
 import static utilz.Constants.UI.SigilConstants.*;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import main.Game;
+import player.Cell;
 import player.Explodables;
-import player.GameData;
+import static player.GameData.rotation;
 import utilz.LoadSave;
 
 public class Sigils {
@@ -34,12 +36,19 @@ public class Sigils {
 
     }
 
-    public void draw (Graphics g, int count, int row, int col) {
-        g.drawImage( images[--count],
+    public void draw (Graphics g, Cell cell, int row, int col) {
+        Graphics2D g2d = (Graphics2D) g;
+        if ( cell.isExplodable(true) )
+            g2d.rotate( Math.toRadians(rotation), CELL_SIZE*col + SIGIL_X_POS + SIGIL_SIZE/2, CELL_SIZE*row + SIGIL_Y_POS + SIGIL_SIZE/2 );
+
+        g2d.drawImage( images[cell.getSigilCount()-1],
                     (int) (CELL_SIZE*col + SIGIL_X_POS),
                     (int) (CELL_SIZE*row + SIGIL_Y_POS),
                     SIGIL_SIZE, SIGIL_SIZE, null
         );
+
+        if ( cell.isExplodable(true) )
+            g2d.rotate( Math.toRadians(-rotation), CELL_SIZE*col + SIGIL_X_POS + SIGIL_SIZE/2, CELL_SIZE*row + SIGIL_Y_POS + SIGIL_SIZE/2 );
     }
 
     public void animateExplodable (Graphics g, Explodables ex, Game game) {

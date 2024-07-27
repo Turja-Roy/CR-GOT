@@ -35,26 +35,11 @@ public class Playing extends Grid implements Statemethods {
         loadSigils();
     }
 
-    private void loadFlags () {
-        flags = new Flags[GameData.numPlayers];
-
-        int i=0;
-        for (Player p : GameData.players)
-            flags[i++] = new Flags(p.getID(), p.getHouse());
-    }
-
-    private void loadSigils () {
-        sigils = new Sigils[GameData.numPlayers];
-
-        int i=0;
-        for (Player p : GameData.players)
-            sigils[i++] = new Sigils(p.getHouse());
-    }
-
     @Override
     public void update () {
         for (Flags flag : flags)
             flag.update();
+        if (GameData.countExplodables > 0) GameData.rotation++;
     }
 
     @Override
@@ -102,28 +87,6 @@ public class Playing extends Grid implements Statemethods {
         drawSigils(g);
     }
 
-    private void drawGrid (Graphics g) {
-        g.setColor(GameData.players[GameData.currPlayer].getColor());
-        g.fillRect(0, 0, CELL_SIZE*10+2, CELL_SIZE*10+2);
-        g.setColor(Color.BLACK);
-
-        for (int i=0 ; i<10 ; i++) {
-            for (int j=0 ; j<10 ; j++) {
-                g.fillRect(i*CELL_SIZE+1, j*CELL_SIZE+1, CELL_SIZE-1, CELL_SIZE-1);
-            }
-        }
-    }
-
-    private void drawSigils (Graphics g) {
-        for (int i=0 ; i<10 ; i++) {
-            for (int j=0 ; j<10 ; j++) {
-                Player whichPlayer = getCell(i,j).getPlayer();
-                if (whichPlayer == null) continue;
-                sigils[whichPlayer.getID()].draw(g, getCell(i,j).getSigilCount(), i, j);
-            }
-        }
-    }
-
     @Override
     public void mouseClicked (MouseEvent e) {
         if (firstClick) {
@@ -133,38 +96,13 @@ public class Playing extends Grid implements Statemethods {
         if (insideBoard(e)) {
             animTick = 0;
             boolean pass = addSigil(getCell(e), GameData.players[GameData.currPlayer]);
+            if ( getCell(e).isExplodable(true) ) GameData.countExplodables++;
             if (pass) nextPlayer();
 
             findWinner();
         }
     }
 
-    private void nextPlayer () {
-        if (GameData.round++ <= GameData.numPlayers) {
-            GameData.currPlayer = (GameData.currPlayer == GameData.numPlayers-1 ? 0 : GameData.currPlayer+1);
-            return;
-        }
-
-        GameData.currPlayer = (GameData.currPlayer == GameData.numPlayers-1 ? 0 : GameData.currPlayer+1);
-        while ( GameData.players[GameData.currPlayer].getTotalSigils() == 0 )
-            GameData.currPlayer = (GameData.currPlayer == GameData.numPlayers-1 ? 0 : GameData.currPlayer+1);
-    }
-
-    private void findWinner () {
-        if (GameData.round <= GameData.numPlayers) return;
-
-        int count=0;
-        for (Player p : GameData.players) {
-            if (p.getTotalSigils() == 0) count++;
-            else GameData.winner = p.getID();
-        }
-
-        if (count == GameData.numPlayers-1) {
-            applyGameState(game);
-            System.out.println("Winner: " + GameData.players[GameData.winner]);
-        }
-    }
-    
     @Override
     public void mousePressed (MouseEvent e) {
         // TODO Auto-generated method stub
@@ -180,6 +118,79 @@ public class Playing extends Grid implements Statemethods {
         // TODO Auto-generated method stub
     }
 
+    /*
+        Constructor helper methods
+    */
+    private void loadFlags () {
+        flags = new Flags[GameData.numPlayers];
+
+        int i=0;
+        for (Player p : GameData.players)
+            flags[i++] = new Flags(p.getID(), p.getHouse());
+    }
+    private void loadSigils () {
+        sigils = new Sigils[GameData.numPlayers];
+
+        int i=0;
+        for (Player p : GameData.players)
+            sigils[i++] = new Sigils(p.getHouse());
+    }
+
+    /*
+        Drawing helper methods
+    */
+    private void drawGrid (Graphics g) {
+        g.setColor(GameData.players[GameData.currPlayer].getColor());
+        g.fillRect(0, 0, CELL_SIZE*10+2, CELL_SIZE*10+2);
+        g.setColor(Color.BLACK);
+
+        for (int i=0 ; i<10 ; i++) {
+            for (int j=0 ; j<10 ; j++) {
+                g.fillRect(i*CELL_SIZE+1, j*CELL_SIZE+1, CELL_SIZE-1, CELL_SIZE-1);
+            }
+        }
+    }
+    private void drawSigils (Graphics g) {
+        for (int i=0 ; i<10 ; i++) {
+            for (int j=0 ; j<10 ; j++) {
+                Player whichPlayer = getCell(i,j).getPlayer();
+                if (whichPlayer == null) continue;
+                sigils[whichPlayer.getID()].draw(g, getCell(i,j), i, j);
+            }
+        }
+    }
+
+    /*
+        Game logic methods
+    */
+    private void nextPlayer () {
+        if (GameData.round++ <= GameData.numPlayers) {
+            GameData.currPlayer = (GameData.currPlayer == GameData.numPlayers-1 ? 0 : GameData.currPlayer+1);
+            return;
+        }
+
+        GameData.currPlayer = (GameData.currPlayer == GameData.numPlayers-1 ? 0 : GameData.currPlayer+1);
+        while ( GameData.players[GameData.currPlayer].getTotalSigils() == 0 )
+            GameData.currPlayer = (GameData.currPlayer == GameData.numPlayers-1 ? 0 : GameData.currPlayer+1);
+    }
+    private void findWinner () {
+        if (GameData.round <= GameData.numPlayers) return;
+
+        int count=0;
+        for (Player p : GameData.players) {
+            if (p.getTotalSigils() == 0) count++;
+            else GameData.winner = p.getID();
+        }
+
+        if (count == GameData.numPlayers-1) {
+            applyGameState(game);
+            System.out.println("Winner: " + GameData.players[GameData.winner]);
+        }
+    }
+
+    /*
+        Misc methods
+    */
     private void applyGameState (Game game) {
         GameState.state = GameState.GAMEOVER;
     }

@@ -8,9 +8,12 @@ public class GameData {
     public static int currPlayer = 0;
     public static int numPlayers;
     public static int round = 1;
-    public static int winner = -1;
+    public static int winner;
 
-    public static ArrayList<Explodables> explodables = new ArrayList<Explodables>();
+    public static int rotation;
+    public static int countExplodables;
+
+    public static ArrayList<Explodables> explodables;
 
     // Initialize players
     public static void initPlayers () {

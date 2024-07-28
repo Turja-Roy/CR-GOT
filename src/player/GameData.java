@@ -1,7 +1,5 @@
 package player;
 
-import java.util.ArrayList;
-
 public class GameData {
     public static Player[] players;
     public static int[] houses;
@@ -13,7 +11,7 @@ public class GameData {
     public static int rotation;
     public static int countExplodables;
 
-    public static ArrayList<Explodables> explodables;
+    public static Explodables explodable;
 
     // Initialize players
     public static void initPlayers () {

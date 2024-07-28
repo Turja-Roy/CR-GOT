@@ -25,10 +25,10 @@ public class Sigils {
     }
 
     private void loadImages () {
-        images = new BufferedImage[3];
+        images = new BufferedImage[4];
         BufferedImage tmp = LoadSave.GetImage(LoadSave.SIGILS);
 
-        for (int i=0 ; i<3 ; i++)
+        for (int i=0 ; i<4 ; i++)
             images[i] = tmp.getSubimage(i*SIGIL_WIDTH_DEFAULT, whichSigil*SIGIL_HEIGHT_DEFAULT, SIGIL_WIDTH_DEFAULT, SIGIL_HEIGHT_DEFAULT);
     }
 

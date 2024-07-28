@@ -157,8 +157,8 @@ public class Game implements Runnable {
     public HouseSelection getHouseSelection () {
         return houseSelection;
     }
-    public Graphics getGraphics () {
-        return g;
+    public GamePanel getGamePanel () {
+        return gamePanel;
     }
 
     public void initPlaying () {

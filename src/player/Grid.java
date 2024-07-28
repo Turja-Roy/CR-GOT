@@ -4,12 +4,19 @@ import static utilz.Constants.GameConstants.*;
 import static utilz.Constants.UI.GameBoard.*;
 
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+
+import main.Game;
 
 public class Grid {
+    protected Game game;
     protected Cell[][] grid = new Cell[10][10];
 
-    public Grid () {
+    protected int animTick = 0;
+    protected boolean animExplode=false;
+
+    public Grid (Game game) {
+        this.game = game;
+
         for (int i = 0; i < 10; i++)
             for (int j = 0; j < 10; j++)
                 grid[i][j] = new Cell(i,j);
@@ -17,36 +24,52 @@ public class Grid {
         GameData.winner = -1;
         GameData.rotation = 0;
         GameData.countExplodables = 0;
-        GameData.explodables = new ArrayList<Explodables>();
     }
 
-    public boolean addSigil (Cell cell, Player player) { // Not exploding
+    protected boolean addSigil (Cell cell, Player player) {
         // Non-empty cell occupied by other player
         if ( !cell.isEmpty() && !cell.isOccupiedBy(player) )
             return false;
 
         // Empty or occupied by current player
         player.addSigil();
-        if ( cell.isExplodable() )
-            explode(cell, player);
-        else
-            cell.addSigil(player);
+        cell.addSigil(player);
 
-        for (Player p : GameData.players) // For checking
-            System.out.println(p);
+        game.getGamePanel().repaint();
 
         return true;
     }
 
-    private void addSigil (Cell cell, Player player, boolean isExploding) { // Exploding
+    protected boolean explode (Cell cell, Player player) {
+        GameData.countExplodables--;
+        cell.emptyCell();
+        int rowIndex=cell.getRowIndex(), colIndex=cell.getColIndex();
+
+        GameData.explodable = new Explodables(player.getID(), cell.getRowIndex(), cell.getColIndex());
+        animExplode = true;
+        animTick = 0;
+
+        game.getGamePanel().repaint();
+
+        boolean flag = false;
+        if ( rowIndex > 0 )
+            addExplodingSigil(grid[rowIndex - 1][colIndex], player);
+        if ( rowIndex < 9 )
+            addExplodingSigil(grid[rowIndex + 1][colIndex], player);
+        if ( colIndex > 0 )
+            addExplodingSigil(grid[rowIndex][colIndex - 1], player);
+        if ( colIndex < 9 )
+            addExplodingSigil(grid[rowIndex][colIndex + 1], player);
+
+        return flag;
+    }
+
+    private void addExplodingSigil (Cell cell, Player player) { // Exploding
         Player prev_player = cell.getPlayer();
 
         // Empty or occupied by current player
         if (prev_player == null || prev_player == player) {
-            if ( cell.isExplodable() )
-                explode(cell, player);
-            else
-                cell.addSigil(player);
+            cell.addSigil(player);
             return;
         }
 
@@ -55,41 +78,24 @@ public class Grid {
         player.addSigil( cell.getSigilCount() );
         cell.setPlayer(player);
 
-        if ( cell.isExplodable() )
+        if ( cell.isExplosive() )
             explode(cell, player);
         else
-            cell.setSigilCount( cell.getSigilCount()+1 );
+            cell.addSigil();
     }
 
-    private void explode (Cell cell, Player player) {
-        GameData.countExplodables--;
-        cell.emptyCell();
-        int rowIndex=cell.getRowIndex(), colIndex=cell.getColIndex();
-
-        if ( rowIndex > 0 )
-            addSigil(grid[rowIndex - 1][colIndex], player, true);
-        if ( rowIndex < 9 )
-            addSigil(grid[rowIndex + 1][colIndex], player, true);
-        if ( colIndex > 0 )
-            addSigil(grid[rowIndex][colIndex - 1], player, true);
-        if ( colIndex < 9 )
-            addSigil(grid[rowIndex][colIndex + 1], player, true);
-    }
-
-    protected boolean isAnyExplodable () {
+    protected void checkAllExplosives () {
         for (int i=0 ; i<10 ; i++)
             for (int j=0 ; j<10 ; j++)
-                if ( grid[i][j].isExplodable(true) )
-                    return true;
-
-        return false;
+                if ( grid[i][j].isExplosive() )
+                    explode(grid[i][j], grid[i][j].getPlayer());
     }
 
     // Getters
-    public Cell getCell (int rowIndex, int colIndex) {
+    protected Cell getCell (int rowIndex, int colIndex) {
         return grid[rowIndex][colIndex];
     }
-    public Cell getCell (MouseEvent e) {
+    protected Cell getCell (MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
 

@@ -22,6 +22,8 @@ public class LoadSave {
     public static final String FLAGS = "Flags.png";
     public static final String SIGILS = "Sigils.png";
 
+    public static final String GAME_OVER = "winnerpage.jpg";
+
     public static BufferedImage GetImage (String fileName) {
         BufferedImage img = null;
         InputStream is = LoadSave.class.getResourceAsStream("/images/" + fileName);

@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Graphics;
 
+import gamestates.GameOver;
 import gamestates.GameState;
 import gamestates.HouseSelection;
 import gamestates.Menu;
@@ -21,6 +22,7 @@ public class Game implements Runnable {
     private NumPlayer numPlayer;
     private Playing playing;
     private HouseSelection houseSelection;
+    private GameOver gameOver;
 
     private Graphics g;
     
@@ -40,6 +42,7 @@ public class Game implements Runnable {
         numPlayer = new NumPlayer();
         // playing = new Playing(this);
         houseSelection = new HouseSelection(this);
+        gameOver = new GameOver();
     }
 
     private void startGame() {
@@ -65,6 +68,8 @@ public class Game implements Runnable {
                 playing.update();
                 break;
             case GAMEOVER:
+                gameOver.update();
+                break;
             default:
                 System.exit(0);
                 break;
@@ -90,6 +95,8 @@ public class Game implements Runnable {
                 playing.draw(g);
                 break;
             case GAMEOVER:
+                gameOver.draw(g);
+                break;
             default:
                 break;
         }

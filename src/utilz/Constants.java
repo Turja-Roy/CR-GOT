@@ -40,6 +40,33 @@ public class Constants {
         public static final int MARTELL = 7;
         public static final int TULLY = 8;
         public static final int BOLTON = 9;
+
+        public static String getHouseName (Player player) {
+            switch (player.getHouse()) {
+                case House.TARGARYEN :
+                    return "TARGARYEN";
+                case House.STARK :
+                    return "STARK";
+                case House.LANNISTER :
+                    return "LANNISTER";
+                case House.BARATHEON :
+                    return "BARATHEON";
+                case House.TYRELL :
+                    return "TYRELL";
+                case House.ARRYN :
+                    return "ARRYN";
+                case House.GREYJOY :
+                    return "GREYJOY";
+                case House.MARTELL :
+                    return "MARTELL";
+                case House.TULLY :
+                    return "TULLY";
+                case House.BOLTON :
+                    return "BOLTON";
+                default :
+                    return "UNKNOWN";
+            }
+        }
     }
 
     // Color constants

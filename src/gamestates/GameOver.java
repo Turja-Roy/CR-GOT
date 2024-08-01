@@ -12,26 +12,41 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 import player.GameData;
+import ui.WinnerPageButtons;
 import utilz.LoadSave;
 import utilz.Constants.Colors;
 import utilz.Constants.House;
 
 public class GameOver implements Statemethods {
+    private WinnerPageButtons[] buttons = new WinnerPageButtons[2];
     private BufferedImage bgImage;
 
     public GameOver () {
+        loadButtons();
         bgImage = LoadSave.GetImage(LoadSave.GAME_OVER);
+    }
+
+    private void loadButtons () {
+        buttons[0] = new WinnerPageButtons(GAME_WIDTH*3/12, GAME_HEIGHT/2 + CELL_SIZE*2, 0, GameState.MENU);
+        buttons[1] = new WinnerPageButtons(GAME_WIDTH*7/12, GAME_HEIGHT/2 + CELL_SIZE*2, 1, GameState.QUIT);
     }
 
     @Override
     public void update () {
-
+        for (WinnerPageButtons button : buttons)
+            button.update();
     }
 
     @Override
     public void draw (Graphics g) {
         g.drawImage(bgImage, 0, 0, GAME_WIDTH, GAME_HEIGHT, null);
 
+        drawText(g);
+        for (WinnerPageButtons button : buttons)
+            button.draw(g);
+    }
+
+    private void drawText (Graphics g) {
         Font font = new Font("Book Antiqua", Font.BOLD, 30);
         String text = "House " + House.getHouseName(GameData.players[GameData.winner]) + " (Player " + (GameData.winner+1) + ")" + " takes the Iron Throne";
 
@@ -59,22 +74,38 @@ public class GameOver implements Statemethods {
 
     @Override
     public void mouseClicked (MouseEvent e) {
-
+        // TODO: MouseClicked event
     }
 
     @Override
     public void mousePressed (MouseEvent e) {
-
+        for (WinnerPageButtons button : buttons)
+            button.setMousePressed(isInside(e, button));
     }
 
     @Override
     public void mouseReleased (MouseEvent e) {
+        for (WinnerPageButtons button : buttons) {
+            if (isInside(e, button) && button.isMousePressed()) {
+                button.applyGamestate();
+                break;
+            }
+        }
+        resetButtons();
+    }
 
+    private void resetButtons () {
+        for (WinnerPageButtons button : buttons)
+            button.resetBools();
     }
 
     @Override
     public void mouseMoved (MouseEvent e) {
-
+        for (WinnerPageButtons button : buttons)
+            button.setMouseOver(isInside(e, button));
     }
 
+    private boolean isInside (MouseEvent e, WinnerPageButtons button) {
+        return button.getBounds().contains(e.getX(), e.getY());
+    }
 }

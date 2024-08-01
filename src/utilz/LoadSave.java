@@ -23,6 +23,7 @@ public class LoadSave {
     public static final String SIGILS = "Sigils.png";
 
     public static final String GAME_OVER = "winnerpage.jpg";
+    public static final String WINNER_PAGE_BUTTONS = "winnerPageButtons.png";
 
     public static BufferedImage GetImage (String fileName) {
         BufferedImage img = null;

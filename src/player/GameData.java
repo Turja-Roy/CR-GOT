@@ -41,4 +41,14 @@ public class GameData {
         for (int h : houses)
             System.out.println(h);
     }
+
+    // Reset data
+    public static void resetData () {
+        currPlayer = 0;
+        round = 1;
+        winner = -1;
+        rotation = 0;
+        countExplodables = 0;
+        explodables.clear();
+    }
 }

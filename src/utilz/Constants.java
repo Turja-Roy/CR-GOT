@@ -239,5 +239,17 @@ public class Constants {
             public static final int SIGIL_X_POS = (int) (CELL_SIZE * 0.2);
             public static final int SIGIL_Y_POS = (int) (CELL_SIZE * 0.2);
         }
+
+        public static class WinnerPageButtons {
+            public static final float BUTTON_COMPRESSION_FACTOR = 0.25f;
+
+            public static final int WPB_PLAY_AGAIN = 0;
+            public static final int WPB_QUIT = 1;
+
+            public static final int WPB_WIDTH_DEFAULT = 469;
+            public static final int WPB_HEIGHT_DEFAULT = 304;
+            public static final int WPB_WIDTH = (int) (WPB_WIDTH_DEFAULT * BUTTON_COMPRESSION_FACTOR * SCALE);
+            public static final int WPB_HEIGHT = (int) (WPB_HEIGHT_DEFAULT * BUTTON_COMPRESSION_FACTOR * SCALE);
+        }
     }
 }

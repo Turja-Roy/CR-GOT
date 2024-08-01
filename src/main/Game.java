@@ -70,6 +70,7 @@ public class Game implements Runnable {
             case GAMEOVER:
                 gameOver.update();
                 break;
+            case QUIT:
             default:
                 System.exit(0);
                 break;
@@ -97,6 +98,7 @@ public class Game implements Runnable {
             case GAMEOVER:
                 gameOver.draw(g);
                 break;
+            case QUIT:
             default:
                 break;
         }
@@ -163,6 +165,9 @@ public class Game implements Runnable {
     }
     public HouseSelection getHouseSelection () {
         return houseSelection;
+    }
+    public GameOver getGameOver () {
+        return gameOver;
     }
     public Graphics getGraphics () {
         return g;
